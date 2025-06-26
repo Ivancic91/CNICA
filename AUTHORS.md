@@ -6,4 +6,4 @@
 
 ## Contributors
 
-None yet. Why not be the first?
+- Benjamin E. Dolata <bendolata2@gmail.com>

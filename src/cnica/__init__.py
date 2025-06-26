@@ -6,7 +6,7 @@ Top level API (:mod:`CNICA`)
 from importlib.metadata import PackageNotFoundError
 from importlib.metadata import version as _version
 
-from .core import example_function
+from .cnica import CNICA
 
 try:
     __version__ = _version("CNICA")
@@ -20,5 +20,5 @@ __email__ = "ivancic91@gmail.com"
 
 __all__ = [
     "__version__",
-    "example_function",
+    "CNICA",
 ]
