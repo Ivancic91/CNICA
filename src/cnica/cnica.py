@@ -1,3 +1,7 @@
+from __future__ import annotations
+from typing import Tuple, Literal
+from numpy.typing import NDArray
+
 import numpy as np
 import warnings
 from scipy.optimize import minimize, nnls
@@ -54,19 +58,19 @@ class CNICA:
     """
 
     def __init__(self, 
-               n_components=2, 
-               nmf_solver='cd',
-               nmf_tol=1e-5,
-               nmf_max_iter=100000,
-               mi_C_trade_offs=(0.0, 0.0, 0.0),
-               mi_S_trade_offs=(1.0, 1.0, 0.0),
-               mi_tol=1e-8,
-               mi_max_iter=1000,
-               tc=None,
-               wc=None,
-               gamma=0.01,
-               refit=True,
-               scaled_poissonian_noise=True):
+               n_components: int =2, 
+               nmf_solver: Literal['cd', 'mu'] ='cd',
+               nmf_tol: float =1e-5,
+               nmf_max_iter: int =100000,
+               mi_C_trade_offs: Tuple[float,float,float] = (0.0, 0.0, 0.0),
+               mi_S_trade_offs: Tuple[float,float,float] = (1.0, 1.0, 0.0),
+               mi_tol: float =1e-8,
+               mi_max_iter: int = 1000,
+               tc: float | None = None,
+               wc: float | None = None,
+               gamma: float =0.01,
+               refit: bool =True,
+               scaled_poissonian_noise: bool =True) -> None:
         """
         Constructs CNICA object.
 
@@ -120,7 +124,7 @@ class CNICA:
         self._scaled_poissonian_noise = scaled_poissonian_noise
 
 
-    def fit(self, D, y=None, init=None):
+    def fit(self, D: NDArray[np.float64], y: None = None, init: None = None):
         """ Fits data matrix using coupled non-negative ICA
      
         Uses coupled non-negative independent component analysis to fit D. 
@@ -225,7 +229,11 @@ class CNICA:
         # Gets mutual information
         self.mutual_information_ = self.get_mutual_information(C, S)
 
-    def fit_transform(self, D, y=None, init=None, refit=True):
+    def fit_transform(self, 
+                      D: NDArray[np.float64], 
+                      y: None = None, 
+                      init: Tuple[NDArray[np.float64],NDArray[np.float64]] | None = None, 
+                      refit: bool =True) -> Tuple[NDArray[np.float64],NDArray[np.float64]]:
         """ Fits CNICA model and returns left and right factors
 
         Parameters
@@ -254,7 +262,7 @@ class CNICA:
         self.fit(D, y=y, init=init)
         return (self.C_, self.S_)
 
-    def get_mutual_information(self, C, S):
+    def get_mutual_information(self, C: NDArray[np.float64], S: NDArray[np.float64]) -> float:
         """ Function to approximate  mutual information
 
         This is a function to approximate the mutual information above but 
@@ -318,15 +326,15 @@ class CNICA:
 
     def _minimize_mutual_information(
         self, 
-        C, 
-        S, 
+        C: NDArray[np.float64], 
+        S: NDArray[np.float64], 
         C_trade_offs,
         S_trade_offs, 
-        tol,
-        max_iter,
-        tc, 
-        wc, 
-        gamma):
+        tol: float,
+        max_iter: int,
+        tc: float | None, 
+        wc: float | None, 
+        gamma: float):
         """ Fits data matrix using coupled non-negative ICA
      
         Uses coupled non-negative independent component analysis to fit D. 
@@ -394,7 +402,7 @@ class CNICA:
         return (mi_C, mi_S, mi_res)
 
     @staticmethod
-    def _low_pass_filter(signal, min_length, order=2, deriv=0):
+    def _low_pass_filter(signal: NDArray[np.float64], min_length, order: int = 2, deriv: int = 0):
         """ Butterworth digital and analog filter design
 
 s         """
@@ -440,7 +448,7 @@ s         """
         return out.squeeze()
 
     def _optimal_low_pass_cutoff(self, data, min_cutoff=5, max_cutoff=250, 
-                                 n_test=20):
+                                 n_test: int =20):
 
         n_components = data.shape[0]
         W = data.shape[1]
@@ -472,16 +480,16 @@ s         """
 
     @staticmethod
     def _linearly_transformed_mutual_information(
-        M_flat, 
-        cov_C, 
-        cov_gC,
-        cov_g2C,
-        cov_S, 
-        cov_gS, 
-        cov_g2S,
-        mu_C,
-        mu_S,
-        t_C, t_gC, t_g2C, t_S, t_gS, t_g2S):
+        M_flat: NDArray[np.float64], 
+        cov_C: NDArray[np.float64], 
+        cov_gC: NDArray[np.float64],
+        cov_g2C: NDArray[np.float64],
+        cov_S: NDArray[np.float64], 
+        cov_gS: NDArray[np.float64], 
+        cov_g2S: NDArray[np.float64],
+        mu_C: NDArray[np.float64],
+        mu_S: NDArray[np.float64],
+        t_C: float, t_gC: float, t_g2C: float, t_S: float, t_gS: float, t_g2S: float):
         """ Function to approximate  mutual information
 
         Performs mutual information approximation for C, S, and their 
@@ -577,7 +585,7 @@ s         """
 
 
     @staticmethod
-    def _determinant_constraint(M_flat):
+    def _determinant_constraint(M_flat: NDArray[np.float64]):
         """ Function to constrain det(M) = 1
 
         This function is 0 if and only if the determinant of M is 1.
@@ -625,7 +633,7 @@ s         """
         return (np.linalg.pinv(M.T) @ C).flatten()
 
     @staticmethod
-    def _MS_positive_constaint(M_flat, S):
+    def _MS_positive_constaint(M_flat: NDArray[np.float64], S: NDArray[np.float64]) -> np.float64:
         """ Function to constrain entries of S to be positive
 
         This function gives an array, where all entries are >= 0 if and only if
@@ -651,7 +659,7 @@ s         """
         return (M @ S).flatten()
 
     @staticmethod
-    def normalize(C, S):
+    def normalize(C: NDArray[np.float64], S: NDArray[np.float64]):
         """ Normalizes C and S so variances of each row are equal
 
         """
@@ -682,7 +690,7 @@ s         """
         idx = np.argsort(np.mean(g2S ** 2, axis=1))[::-1]
         return (C[idx], S[idx])
        
-    def get_reconstruction_error(self, D, C, S):
+    def get_reconstruction_error(self, D: NDArray[np.float64], C: NDArray[np.float64], S: NDArray[np.float64]) -> np.float64:
         """ 
         """
         if self._scaled_poissonian_noise:
@@ -716,7 +724,7 @@ class WNMF:
         self.max_iter = max_iter
         self.tol = tol
 
-    def fit(self, D, C, S):
+    def fit(self, D: NDArray[np.float64], C: NDArray[np.float64], S: NDArray[np.float64]):
 
         # Initializes data
         m, n = D.shape
@@ -761,7 +769,8 @@ class WNMF:
         return (self.C_, self.S_)
 
     @staticmethod
-    def update_C(D, M, C, S, v):
+    def update_C(D: NDArray[np.float64], M: NDArray[np.float64], 
+                 C: NDArray[np.float64], S: NDArray[np.float64], v: float) -> None:
         """
         Updates the matrix C and M using the multiplicative update rule.
 
@@ -803,7 +812,8 @@ class WNMF:
         #return C
 
     @staticmethod
-    def update_S(D, M, C, S, v):
+    def update_S(D: NDArray[np.float64], M: NDArray[np.float64], 
+                 C: NDArray[np.float64], S: NDArray[np.float64], v: float) -> None:
         """
         Updates the matrix S and M using the multiplicative update rule.
 
@@ -844,7 +854,7 @@ class WNMF:
         #return S
 
     @staticmethod
-    def update_v(D, M, C, S):
+    def update_v(D: NDArray[np.float64], M: NDArray[np.float64], C: NDArray[np.float64], S: NDArray[np.float64]):
         # Pre-computation of model and variance
         #M = C.T @ S
         #V = np.maximum(v * M, 1e-20)
@@ -860,12 +870,12 @@ class WNMF:
         return v
 
     @staticmethod
-    def estimate_v(D, M):
+    def estimate_v(D: NDArray[np.float64], M: NDArray[np.float64]):
         # Initial estimate of v by nnls fitting
         var = (D - M)**2
         M_flat = M.flatten()
         var_flat = var.flatten()
         coefs = np.array([M_flat]).T
-        v, rnorm = nnls(coefs, var_flat)
+        v, _ = nnls(coefs, var_flat)
 
         return v[0]
