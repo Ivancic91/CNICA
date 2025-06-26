@@ -37,11 +37,13 @@
 
 # `CNICA`
 
-A Python package for stuff.
+A Python package to perform Coupled Non-negative Independent Component Analysis.
 
 ## Overview
 
-Quick overview...
+This package was designed to solve the problem of D = C^T S, where D is a known
+positive matrix, and C and S are unknown positive matrices. This package is 
+specifically designed for the  
 
 ## Features
 
@@ -56,15 +58,15 @@ request for wanted features and suggestions!
 
 Use one of the following
 
-```bash
-pip install CNICA
-```
+[comment]: <> ```bash
+[comment]: <> pip install CNICA
+[comment]: <> ```
 
-or
+[comment]: <> or
 
-```bash
-conda install -c Ivancic91 CNICA
-```
+[comment]: <> ```bash
+[comment]: <> conda install -c Ivancic91 CNICA
+[comment]: <> ```
 
 ## Example usage
 
