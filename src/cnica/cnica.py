@@ -402,10 +402,11 @@ class CNICA:
         return (mi_C, mi_S, mi_res)
 
     @staticmethod
-    def _low_pass_filter(signal: NDArray[np.float64], min_length, order: int = 2, deriv: int = 0):
-        """ Butterworth digital and analog filter design
-
-s         """
+    def _low_pass_filter(signal: NDArray[np.float64], 
+                         min_length: float | int | NDArray[np.float64], 
+                         order: int = 2, deriv: int = 0):
+        """ Butterworth digital and analog filter designs
+        """
         signal = np.atleast_2d(signal)
         L, N = signal.shape
         if isinstance(min_length, float) or isinstance(min_length, int):
@@ -447,9 +448,14 @@ s         """
             raise ValueError("Only deriv=0, 1, or 2 are supported")
         return out.squeeze()
 
-    def _optimal_low_pass_cutoff(self, data, min_cutoff=5, max_cutoff=250, 
-                                 n_test: int =20):
-
+    def _optimal_low_pass_cutoff(self, data: NDArray[np.float64], 
+                                 min_cutoff: float = 5.0, max_cutoff: float = 250.0, 
+                                 n_test: int = 20):
+        """ Determines optimal low-pass filter by using method in 
+        https://doi.org/10.1123/jab.15.3.303, John Challis "A Proceedure for the
+        Automatic Determination of Filter Cutoff Frequency for the Processing of
+        Biomechanical Data."
+        """
         n_components = data.shape[0]
         W = data.shape[1]
 
@@ -578,9 +584,6 @@ s         """
         # Term to ensure stability --> 0 when constraints obeyed
         mi += (1.0 / np.linalg.det(M) - 1.0)**2
 
-        # Regularization term
-        #mi += 10 * np.mean((M @ mu_S) / np.sqrt(np.diag(cov_MS))  + np.sqrt(np.diag(cov_MC)))
-
         return mi
 
 
@@ -678,7 +681,7 @@ s         """
             norm_S = lam @ S
         return (norm_C, norm_S)
 
-    def order(self, C, S):
+    def order(self, C: NDArray[np.float64], S: NDArray[np.float64]):
         """ Orders rows of C and S by maximum curvature in S
         """
         wc = self._wc
