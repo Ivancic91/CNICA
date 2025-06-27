@@ -4,7 +4,7 @@ from numpy.typing import NDArray
 
 import numpy as np
 import warnings
-from scipy.optimize import minimize, nnls
+from scipy.optimize import minimize, OptimizeResult
 from sklearn.decomposition import NMF
 from scipy.signal import butter, filtfilt
 from scipy.fft import fft, ifft, fftfreq
@@ -60,14 +60,14 @@ class CNICA:
     def __init__(self, 
                n_components: int = 2, 
                nmf_solver: Literal['cd', 'mu'] ='cd',
-               nmf_tol: float =1e-5,
-               nmf_max_iter: int =100000,
+               nmf_tol: float = 1e-5,
+               nmf_max_iter: int = 100000,
                mi_C_trade_offs: Tuple[float,float,float] = (0.0, 0.0, 0.0),
                mi_S_trade_offs: Tuple[float,float,float] = (1.0, 1.0, 0.0),
                mi_tol: float =1e-8,
                mi_max_iter: int = 1000,
-               tc: float | None = None,
-               wc: float | None = None,
+               tc: float | NDArray[np.float64] | None = None,
+               wc: float | NDArray[np.float64] | None = None,
                gamma: float =0.01,
                refit: bool =True,
                scaled_poissonian_noise: bool =True) -> None:
@@ -95,10 +95,10 @@ class CNICA:
             Tolerance of the stopping condition for mi.            
         mi_max_iter : int, default=1000
             Maximum number of iterations for mutual information minimization.
-        tc : float, default=5.0
+        tc : float, default=None
             Critical time for C low pass filter in number of time points. 
             Inverse of the critical frequency.
-        wc : float, default=5.0
+        wc : float, default=None
             Critical wavenumber for S low pass filter in number of wavenumbers. 
             Inverse of the critical frequency.
         refit : bool
@@ -173,8 +173,6 @@ class CNICA:
             self._mi_S_trade_offs,
             self._mi_tol, 
             self._mi_max_iter,
-            self._tc,
-            self._wc, 
             self._gamma)
         self._mi_res0 = mi_res0
         self._mi_C0_, self._mi_S0_ = mi_C0, mi_S0
@@ -208,9 +206,7 @@ class CNICA:
                 self._mi_C_trade_offs,
                 self._mi_S_trade_offs,
                 self._mi_tol,
-                self._mi_max_iter,
-                self._tc,
-                self._wc,       
+                self._mi_max_iter,       
                 0.0)
             self._mi_res = mi_res
         else:
@@ -331,10 +327,8 @@ class CNICA:
         C_trade_offs: Tuple[float,float,float],
         S_trade_offs: Tuple[float,float,float], 
         tol: float,
-        max_iter: int,
-        tc: float | None, 
-        wc: float | None, 
-        gamma: float):
+        max_iter: int, 
+        gamma: float) -> Tuple[NDArray[np.float64],NDArray[np.float64],OptimizeResult]:
         """ Fits data matrix using coupled non-negative ICA
      
         Uses coupled non-negative independent component analysis to fit D. 
@@ -344,12 +338,13 @@ class CNICA:
         # Initializes left and right factors and smoothed derivatives
         C, S = self.normalize(C, S)
         clipped_C, clipped_S = C.copy(), S.copy()
-        if tc is None:
+        
+        tc = self._tc
+        wc = self._wc
+        if self._tc is None:
             tc = self._optimal_low_pass_cutoff(C, min_cutoff=2, max_cutoff=20)
-        if wc is None:
+        if self._wc is None:
             wc = self._optimal_low_pass_cutoff(S, min_cutoff=5, max_cutoff=250)
-        smooth_C = self._low_pass_filter(C, tc)
-        smooth_S = self._low_pass_filter(S, wc)
         grad_C = self._low_pass_filter(C, tc, deriv=1)
         grad_S = self._low_pass_filter(S, wc, deriv=1)
         clipped_C[C < gamma * np.max(C)] = gamma * np.max(C)
@@ -392,7 +387,7 @@ class CNICA:
             options={'maxiter': max_iter})
 
         # Gets positive C and S
-        M = mi_res['x'].reshape((self.n_components_, self.n_components_)) 
+        M = np.array(mi_res['x'],dtype=np.float64).reshape((self.n_components_, self.n_components_)) 
         mi_C = np.linalg.pinv(M.T) @ C
         mi_S = M @ S
         mi_C[mi_C < 0] = 0
@@ -450,7 +445,7 @@ class CNICA:
 
     def _optimal_low_pass_cutoff(self, data: NDArray[np.float64], 
                                  min_cutoff: float = 5.0, max_cutoff: float = 250.0, 
-                                 n_test: int = 20):
+                                 n_test: int = 20) -> NDArray[np.float64]:
         """ Determines optimal low-pass filter by using method in 
         https://doi.org/10.1123/jab.15.3.303, John Challis "A Proceedure for the
         Automatic Determination of Filter Cutoff Frequency for the Processing of
@@ -461,7 +456,7 @@ class CNICA:
 
         mses = np.zeros((n_test, n_components))
         cutoff_lengths = np.logspace(np.log10(min_cutoff), np.log10(max_cutoff), 
-                                     n_test)
+                                     n_test, dtype=np.float64)
         diff = np.zeros_like(data)
         autocorrelation = np.zeros_like(diff)
 
@@ -610,7 +605,7 @@ class CNICA:
         return np.linalg.det(M) - 1
 
     @staticmethod
-    def _MC_positive_constaint(M_flat, C):
+    def _MC_positive_constaint(M_flat: NDArray[np.float64], C: NDArray[np.float64]) -> NDArray[np.float64]:
         """ Function to constrain entries of C to be positive
 
         This function gives an array, where all entries are >= 0 if and only if
@@ -636,7 +631,7 @@ class CNICA:
         return (np.linalg.pinv(M.T) @ C).flatten()
 
     @staticmethod
-    def _MS_positive_constaint(M_flat: NDArray[np.float64], S: NDArray[np.float64]) -> np.float64:
+    def _MS_positive_constaint(M_flat: NDArray[np.float64], S: NDArray[np.float64]) -> NDArray[np.float64]:
         """ Function to constrain entries of S to be positive
 
         This function gives an array, where all entries are >= 0 if and only if
@@ -662,7 +657,9 @@ class CNICA:
         return (M @ S).flatten()
 
     @staticmethod
-    def normalize(C: NDArray[np.float64], S: NDArray[np.float64]):
+    def normalize(C: NDArray[np.float64], 
+                  S: NDArray[np.float64]
+                  ) -> Tuple[NDArray[np.float64],NDArray[np.float64]]:
         """ Normalizes C and S so variances of each row are equal
 
         """
@@ -681,7 +678,7 @@ class CNICA:
             norm_S = lam @ S
         return (norm_C, norm_S)
 
-    def order(self, C: NDArray[np.float64], S: NDArray[np.float64]):
+    def order(self, C: NDArray[np.float64], S: NDArray[np.float64]) -> Tuple[NDArray[np.float64],NDArray[np.float64]]:
         """ Orders rows of C and S by maximum curvature in S
         """
         wc = self._wc
@@ -693,7 +690,7 @@ class CNICA:
         idx = np.argsort(np.mean(g2S ** 2, axis=1))[::-1]
         return (C[idx], S[idx])
        
-    def get_reconstruction_error(self, D: NDArray[np.float64], C: NDArray[np.float64], S: NDArray[np.float64]) -> np.float64:
+    def get_reconstruction_error(self, D: NDArray[np.float64], C: NDArray[np.float64], S: NDArray[np.float64]) -> np.floating:
         """ 
         """
         if self._scaled_poissonian_noise:
@@ -722,8 +719,8 @@ class WNMF:
     """
 
     def __init__(self,
-                 max_iter=10000,
-                 tol=1e-4):
+                 max_iter: int = 10000,
+                 tol: float = 1e-4):
         self.max_iter = max_iter
         self.tol = tol
 
@@ -744,7 +741,6 @@ class WNMF:
             The initial estimate of the factor matrix S.
         """
         # Initializes data
-        m, n = D.shape
         D, C, S = D.copy(), C.copy(), S.copy()
         D[D < 0.0] = 0.0 
         C[C<=0] = np.min(C.flatten()[C.flatten() > 0]) 
@@ -752,31 +748,31 @@ class WNMF:
 
         # Loops through iterations
         M = C.T @ S 
+
+        f = np.inf
+        v, V = 0.0, np.zeros_like(M)
         for iter_ in range(self.max_iter):
-            if iter_ == 0:
-                f_old = np.inf
-            else:
-                f_old = f 
+            f_old = f 
 
             # Updates arrays
             v = self.update_v(D, M, C, S)
-            if iter_ == 0:
-                V = np.maximum(v * M, 1e-20)
-                f = np.mean((M - D)**2 / V + np.log(V))
-                self.initial_f = f
             self.update_C(D, M, C, S, v) 
             self.update_S(D, M, C, S, v)
 
             # Convergence check
             V[:] = np.maximum(v * M, 1e-20)
             f = np.mean((M - D)**2 / V + np.log(V))
+            if iter_ == 0:
+                self.initial_f = f
+
+            # Saves number of iterations
+            self.n_iter_ = iter_
 
             # Breaks for small changes in objective function
             if abs(f - f_old) < self.tol:
                 break
 
         self.f_ = f
-        self.n_iter_ = iter_
         self.v_ = v
         self.C_ = C
         self.S_ = S
