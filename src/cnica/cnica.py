@@ -378,7 +378,6 @@ class CNICA:
             M0, 
             args=(cov_C, cov_grad_C, cov_grad2_C,
                   cov_S, cov_grad_S, cov_grad2_S,
-                  mu_C, mu_S,
                   t_C, t_gC, t_g2C, 
                   t_S, t_gS, t_g2S),
             constraints=cons,
@@ -488,8 +487,6 @@ class CNICA:
         cov_S: NDArray[np.float64], 
         cov_gS: NDArray[np.float64], 
         cov_g2S: NDArray[np.float64],
-        mu_C: NDArray[np.float64],
-        mu_S: NDArray[np.float64],
         t_C: float, t_gC: float, t_g2C: float, t_S: float, t_gS: float, t_g2S: float):
         """ Function to approximate  mutual information
 
