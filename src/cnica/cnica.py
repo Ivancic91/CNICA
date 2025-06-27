@@ -58,7 +58,7 @@ class CNICA:
     """
 
     def __init__(self, 
-               n_components: int =2, 
+               n_components: int = 2, 
                nmf_solver: Literal['cd', 'mu'] ='cd',
                nmf_tol: float =1e-5,
                nmf_max_iter: int =100000,
@@ -328,8 +328,8 @@ class CNICA:
         self, 
         C: NDArray[np.float64], 
         S: NDArray[np.float64], 
-        C_trade_offs,
-        S_trade_offs, 
+        C_trade_offs: Tuple[float,float,float],
+        S_trade_offs: Tuple[float,float,float], 
         tol: float,
         max_iter: int,
         tc: float | None, 
@@ -724,8 +724,22 @@ class WNMF:
         self.max_iter = max_iter
         self.tol = tol
 
-    def fit(self, D: NDArray[np.float64], C: NDArray[np.float64], S: NDArray[np.float64]):
+    def fit(self, D: NDArray[np.float64], C: NDArray[np.float64], 
+            S: NDArray[np.float64]):
+        """
+        Fits the observed data matrix to a low rank approximation of D 
+        (= C^T @ S) whose product approximates a scaled Poisonian process to 
+        maximize the probability of the model given D.
 
+        Parameters
+        ----------
+        D : ndarray of shape (m, n)
+            The observed data matrix.
+        C : ndarray of shape (r, m)
+            The initial estimate of the factor matrix C.
+        S : ndarray of shape (r, n)
+            The initial estimate of the factor matrix S.
+        """
         # Initializes data
         m, n = D.shape
         D, C, S = D.copy(), C.copy(), S.copy()
@@ -764,7 +778,20 @@ class WNMF:
         self.C_ = C
         self.S_ = S
 
-    def fit_transform(self, D, C, S):
+    def fit_transform(self, D: NDArray[np.float64], C: NDArray[np.float64], 
+                      S: NDArray[np.float64]):
+        """
+        Fits the observed data matrix and transforms it to output model.
+
+        Parameters
+        ----------
+        D : ndarray of shape (m, n)
+            The observed data matrix.
+        C : ndarray of shape (r, m)
+            The initial estimate of the factor matrix C.
+        S : ndarray of shape (r, n)
+            The initial estimate of the factor matrix S.
+        """
         self.fit(D, C, S)
         return (self.C_, self.S_)
 
@@ -780,36 +807,22 @@ class WNMF:
             The observed data matrix.
         M : ndarray of shape (m, n)
             The model matrix
-        C : ndarray of shape (m, r)
+        C : ndarray of shape (r, m)
             The current estimate of the factor matrix C.
         S : ndarray of shape (r, n)
             The current estimate of the factor matrix S.
         v : float
             A positive constant scaling the contribution of C^T S.
-
-        Returns
-        -------
-        C : ndarray of shape (m, r)
-            The updated matrix C.
         """
-        # Pre-computation of model and variance
-        #M = C.T @ S
-        #V = np.maximum(v * M, 1e-20)
-
-        # Computes multiplicative updates
-        #neg_C = S @ ((2 * M / V + v / V).T)
-        #pos_C = S @ ((2 * D / V + v * ((D - M) / V)**2).T)
+        # Multiplicative update, max avoids division by 0
         Mp = np.maximum(M, 1e-20)
         neg_C = S @ ((2 + v / Mp).T)
         pos_C = S @ ((2 * D / Mp + ((D - M) / Mp)**2).T)
-        C *= pos_C / np.maximum(neg_C, 1e-20)  # max avoids division by 0
-        #C[:] = C * pos_C / np.maximum(neg_C, 1e-20)
+        C *= pos_C / np.maximum(neg_C, 1e-20)
 
-        # New
-        #C *= (S @ (D/M).T) / np.maximum(S @ (1 + v / M.T), 1e-20) 
+        # New model
         M[:] = C.T @ S
 
-        #return C
 
     @staticmethod
     def update_S(D: NDArray[np.float64], M: NDArray[np.float64], 
@@ -823,7 +836,36 @@ class WNMF:
             The observed data matrix.
         M : ndarray of shape (m, n)
             The model matrix
-        C : ndarray of shape (m, r)
+        C : ndarray of shape (r, m)
+            The current estimate of the factor matrix C.
+        S : ndarray of shape (r, n)
+            The current estimate of the factor matrix S.
+        v : float
+            A positive constant scaling the contribution of C^T S.
+        """
+        # Multiplicative update, max avoids division by 0
+        Mp = np.maximum(M, 1e-20)
+        neg_S = C @ (2 + v / Mp)
+        pos_S = C @ (2 * D / Mp + ((D - M) / Mp)**2)
+        S *= pos_S / np.maximum(neg_S, 1e-20)
+
+        # New model
+        M[:] = C.T @ S
+
+        #return S
+
+    @staticmethod
+    def update_v(D: NDArray[np.float64], M: NDArray[np.float64], C: NDArray[np.float64], S: NDArray[np.float64]):
+        """ 
+        Updates parameter v using the multiplicative update rule.
+
+        Parameters
+        ----------
+        D : ndarray of shape (m, n)
+            The observed data matrix.
+        M : ndarray of shape (m, n)
+            The model matrix
+        C : ndarray of shape (r, m)
             The current estimate of the factor matrix C.
         S : ndarray of shape (r, n)
             The current estimate of the factor matrix S.
@@ -832,50 +874,12 @@ class WNMF:
 
         Returns
         -------
-        S : ndarray of shape (r, n)
+        v : float
             The updated matrix S.
         """
-        # Pre-computation of model and variance
-        #M = C.T @ S
-        #V = np.maximum(v * M, 1e-20)
-
-        # Computes multiplicative updates original
-        #neg_S = C @ (2 * M / V + v / V)
-        #pos_S = C @ (2 * D / V + v * ((D - M) / V)**2)
-        Mp = np.maximum(M, 1e-20)
-        neg_S = C @ (2 + v / Mp)
-        pos_S = C @ (2 * D / Mp + ((D - M) / Mp)**2)
-        S *= pos_S / np.maximum(neg_S, 1e-20) # max avoids division by 0
-
-        # New
-        #S *= (C @ (D/M)) / np.maximum(C @ (1 + v / M), 1e-20)
-        M[:] = C.T @ S
-
-        #return S
-
-    @staticmethod
-    def update_v(D: NDArray[np.float64], M: NDArray[np.float64], C: NDArray[np.float64], S: NDArray[np.float64]):
-        # Pre-computation of model and variance
-        #M = C.T @ S
-        #V = np.maximum(v * M, 1e-20)
-
-        # Multiplicative updates original
-        #pos_A = M * (D - M)**2 / V**2
-        #neg_A = M / V
-        #v *= np.sum(pos_A) / max(np.sum(neg_A), 1e-20)
-
-        # New
+        # Multiplicative update, max avoids division by 0
         v = np.sum((D - M)**2 / np.maximum(M, 1e-20)) / D.size
 
         return v
 
-    @staticmethod
-    def estimate_v(D: NDArray[np.float64], M: NDArray[np.float64]):
-        # Initial estimate of v by nnls fitting
-        var = (D - M)**2
-        M_flat = M.flatten()
-        var_flat = var.flatten()
-        coefs = np.array([M_flat]).T
-        v, _ = nnls(coefs, var_flat)
 
-        return v[0]
