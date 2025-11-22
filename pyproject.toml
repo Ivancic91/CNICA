@@ -13,7 +13,10 @@ keywords = [
     "CNICA",
 ]
 license = "NIST-PD"
-license-files = [ "LICENSE" ]
+#license-files = [ "LICENSE" ]
+[project.license-files] # <-- This is the NEW TABLE (Dictionary) syntax
+paths = ["LICENSE"]     # <-- This is the list of files inside the table
+
 authors = [
     { name = "Robert J. S. Ivancic", email = "ivancic91@gmail.com" },
 ]
@@ -37,6 +40,9 @@ dynamic = [
     "version",
 ]
 dependencies = [
+"numpy>=1.18.0",
+"scipy>=1.4.0",
+"scikit-learn>=0.22.0",
 ]
 urls.Documentation = "https://pages.nist.gov/CNICA/"
 urls.Homepage = "https://github.com/Ivancic91/CNICA"

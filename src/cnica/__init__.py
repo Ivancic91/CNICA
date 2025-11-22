@@ -8,10 +8,10 @@ from importlib.metadata import version as _version
 
 from .cnica import CNICA, WNMF
 
-try:
-    __version__ = _version("CNICA")
-except PackageNotFoundError:  # pragma: no cover
-    __version__ = "999"
+#try:
+#    __version__ = _version("CNICA")
+#except PackageNotFoundError:  # pragma: no cover
+#    __version__ = "999"
 
 
 __author__ = """Robert J. S. Ivancic"""
@@ -23,3 +23,5 @@ __all__ = [
     "CNICA",
     "WNMF",
 ]
+
+
