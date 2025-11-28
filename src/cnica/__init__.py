@@ -3,11 +3,12 @@ Top level API (:mod:`CNICA`)
 ======================================================
 """
 
-from importlib.metadata import PackageNotFoundError
-from importlib.metadata import version as _version
+#from importlib.metadata import PackageNotFoundError
+#from importlib.metadata import version as _version
 
 from .cnica import CNICA, WNMF
 
+__version__ = "0.0.1" 
 #try:
 #    __version__ = _version("CNICA")
 #except PackageNotFoundError:  # pragma: no cover

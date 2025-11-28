@@ -13,7 +13,9 @@ keywords = [
     "CNICA",
 ]
 license = "NIST-PD"
+version = "0.0.1"
 #license-files = [ "LICENSE" ]
+
 [project.license-files] # <-- This is the NEW TABLE (Dictionary) syntax
 paths = ["LICENSE"]     # <-- This is the list of files inside the table
 
