@@ -32,8 +32,9 @@ classifiers = [
     "Programming Language :: Python :: 3.13",
     "Topic :: Scientific/Engineering",
 ]
+readme = { file = "README.md", content-type = "text/markdown" }
 dynamic = [
-    "readme",
+    # "readme",
     "version",
 ]
 dependencies = [
@@ -107,13 +108,13 @@ exclude = [
 [tool.hatch.build.targets.wheel]
 packages = ["src/cnica"]
 
-[tool.hatch.metadata.hooks.fancy-pypi-readme]
-content-type = "text/markdown"
-fragments = [
-    { path = "README.md" },
-    { path = "CHANGELOG.md" },
-    { path = "LICENSE" },
-]
+#[tool.hatch.metadata.hooks.fancy-pypi-readme]
+#content-type = "text/markdown"
+#fragments = [
+#    { path = "README.md" },
+#    { path = "CHANGELOG.md" },
+#    { path = "LICENSE" },
+#]
 
 [tool.check-wheel-contents]
 toplevel = [ "cnica" ]
