@@ -1,0 +1,1573 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>cnica.optimizer &#8212; CNICA 0.0.2.dev1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="https://pages.nist.gov/nist-header-footer/css/nist-combined.css" />
+    <link rel="stylesheet" type="text/css" href="https://pages.nist.gov/leaveNotice/css/jquery.leaveNotice.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=10e0586b"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/cnica/optimizer';</script>
+    <script src="https://code.jquery.com/jquery-3.6.2.min.js"></script>
+    <script src="https://pages.nist.gov/nist-header-footer/js/nist-header-footer.js"></script>
+    <script src="https://pages.nist.gov/leaveNotice/js/jquery.leaveNotice-nist.min.js"></script>
+    <script src="../../_static/js/leave_notice.js?v=133c5535"></script>
+    <script async="async" id="_fed_au_ua_tag" type="text/javascript" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=NIST&subagency=github&pua=UA-66610693-1&yt=true&exts=ppsx,pps,f90,sch,rtf,wrl,txz,m1v,xlsm,msi,xsd,f,tif,eps,mpg,xml,pl,xlt,c"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="2026-04-13"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">CNICA 0.0.2.dev1 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../index.html">
+                    CNICA
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../examples/index.html">User guide</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/example-usage.html">Example Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/usage/demo.html">A demonstration of CNICA</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../reference/index.html">API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/generated/cnica.CNICA.html">cnica.CNICA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/generated/cnica.MIOptimizer.html">cnica.MIOptimizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/generated/cnica.FuncResult.html">cnica.FuncResult</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/generated/cnica.MIOptimizerResult.html">cnica.MIOptimizerResult</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/generated/cnica.NMFParams.html">cnica.NMFParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/generated/cnica.MIOParams.html">cnica.MIOParams</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../authors.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../navigation.html">Indices and tables</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../genindex.html">Index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../py-modindex.html">Module Index</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Ivancic91/CNICA" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Ivancic91/CNICA/issues/new?title=Issue%20on%20page%20%2F_modules/cnica/optimizer.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for cnica.optimizer</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.linalg</span><span class="w"> </span><span class="kn">import</span> <span class="n">expm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.spatial</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConvexHull</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.filter</span><span class="w"> </span><span class="kn">import</span> <span class="n">Filter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">MIOptimizerResult</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="n">NUMERICAL_EPSILON</span> <span class="o">=</span> <span class="mf">1.0e-14</span> <span class="c1"># Guards log(0) and 1/0 throughout</span>
+<span class="n">BARRIER_DELTA</span> <span class="o">=</span> <span class="mf">1e-2</span>        <span class="c1"># Barrier boundary offset: enforces MS &gt; -delta</span>
+<span class="n">ARMIJO_SUFFICIENT_DECREASE</span> <span class="o">=</span> <span class="mf">1e-4</span>
+<span class="n">LINE_SEARCH_BACKTRACK_FACTOR</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">BARRIER_COOLING_RATE</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="mf">50.0</span>
+<span class="n">SPARSITY_GATE_STEEPNESS</span> <span class="o">=</span> <span class="mf">30.0</span>
+<span class="n">NUM_PROBES_PER_D</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">CONVEX_HULL_MAX_DIM</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">CONVEX_HULL_MAX_SAMPLES</span> <span class="o">=</span> <span class="mi">1_000_000</span>
+<span class="n">RNG_SEED</span> <span class="o">=</span> <span class="mi">42</span>
+
+
+<div class="viewcode-block" id="FuncResult">
+<a class="viewcode-back" href="../../reference/generated/cnica.FuncResult.html#cnica.FuncResult">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">FuncResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Result of an objective function evaluation.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    f : float</span>
+<span class="sd">        Scalar objective value.</span>
+<span class="sd">    grad : np.ndarray or None</span>
+<span class="sd">        Gradient array of the same shape as the input matrix :math:`M`,</span>
+<span class="sd">        or None if ``compute_grad=False``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">f</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">grad</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+
+
+<div class="viewcode-block" id="MIOptimizer">
+<a class="viewcode-back" href="../../reference/generated/cnica.MIOptimizer.html#cnica.MIOptimizer">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">MIOptimizer</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Riemannian Manifold Optimizer using Interior Point (Log-Barrier) methods.</span>
+
+<span class="sd">    This class minimizes a composite objective function on the manifold of</span>
+<span class="sd">    invertible matrices. It is designed to find an optimal linear transformation</span>
+<span class="sd">    :math:`M` that decorrelates signal components while strictly satisfying</span>
+<span class="sd">    non-negativity constraints via log-barrier penalties.</span>
+
+<span class="sd">    The objective function is defined as:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        f(M) = f_{\text{main}}(M) + \mu (h_R(M) + h_L(M))</span>
+
+<span class="sd">    where :math:`f_{\text{main}}` is the log-determinant of transformed</span>
+<span class="sd">    covariances, and :math:`h_R, h_L` are the barrier functions for the</span>
+<span class="sd">    constraints :math:`MS &gt; 0` and :math:`M^{-T}C &gt; 0` respectively.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    params : tuple</span>
+<span class="sd">        Three flags ``(use_0th, use_1st, use_2nd)`` selecting which derivative</span>
+<span class="sd">        orders to include in the decorrelation objective. At least one</span>
+<span class="sd">        must be True.</span>
+<span class="sd">    max_outer_loop_iters : int, default=10</span>
+<span class="sd">        Number of iterations for the barrier cooling schedule. In each outer</span>
+<span class="sd">        iteration, the barrier parameter :math:`\mu` is reduced.</span>
+<span class="sd">    max_inner_loop_iters : int, default=1000</span>
+<span class="sd">        Maximum number of descent steps to take for a fixed value of :math:`\mu`.</span>
+<span class="sd">    max_line_search_iters : int, default=50</span>
+<span class="sd">        Maximum number of backtracking steps to perform during the line search</span>
+<span class="sd">        to satisfy the Armijo condition.</span>
+<span class="sd">    tol : float, default=1e-12</span>
+<span class="sd">        Convergence tolerance for the norm of the projected gradient.</span>
+<span class="sd">    gamma : float, default=0.02</span>
+<span class="sd">        The fraction of lowest-magnitude points to prune from the dataset to</span>
+<span class="sd">        avoid numerical issues near the origin when enforcing the barrier</span>
+<span class="sd">        constraints. The removed points are those with the minimum of either</span>
+<span class="sd">        the percentile threshold or the max magnitude threshold.</span>
+<span class="sd">    initial_lr : float, default=0.1</span>
+<span class="sd">        The initial step size (learning rate) for the backtracking line search.</span>
+<span class="sd">    filter_half_order : int, default=10</span>
+<span class="sd">        Half-order :math:`m` of the Parks-McClellan FIR filters used to compute</span>
+<span class="sd">        1st and 2nd order temporal derivatives of the input signals.</span>
+<span class="sd">    filter_max_lag : int, default=10</span>
+<span class="sd">        Maximum autocorrelation lag for unsupervised MSRAC-based filter tuning.</span>
+<span class="sd">    lam : float, default=10.0</span>
+<span class="sd">        Regularization strength for the sparsity norm. Set to 0 to disable.</span>
+<span class="sd">    sparsity_gate_threshold : float, default=0.5</span>
+<span class="sd">        Midpoint of the sigmoid gate in the sparsity norm. Rows with a</span>
+<span class="sd">        Hoyer density below this value are penalized; rows above it</span>
+<span class="sd">        (e.g. dense sine-like signals) are protected.</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    fit_transform(C, S)</span>
+<span class="sd">        Executes the full optimization process to find the optimal matrix :math:`M`.</span>
+<span class="sd">    optimize_step(M, inv_M, Sigmas, C, S, mu, initial_lr, max_line_search_iters)</span>
+<span class="sd">        Performs a single Riemannian descent step with linearized backtracking.</span>
+<span class="sd">    f(M, inv_M, Sigmas, C, S, mu, compute_grad=True)</span>
+<span class="sd">        Calculates the total objective function and its projected tangent gradient.</span>
+<span class="sd">    normalize(C, S)</span>
+<span class="sd">        Rescales constraint matrices to balance barrier gradients.</span>
+<span class="sd">    get_covariances(S, params)</span>
+<span class="sd">        Computes the covariance matrices of the data and its derivatives.</span>
+<span class="sd">    prune(data, gamma)</span>
+<span class="sd">        Remove low-magnitude points near the origin from a data matrix.</span>
+<span class="sd">    extract_boundary(data)</span>
+<span class="sd">        Convex hull or support-function approximation of boundary points.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Three key numerical techniques keep the optimizer efficient and stable:</span>
+
+<span class="sd">    1. **Boundary Reduction**: Barrier constraints are enforced only on the</span>
+<span class="sd">    convex hull vertices of C and S (or a support-function approximation</span>
+<span class="sd">    for d &gt; 5), reducing barrier terms from O(samples) to O(vertices).</span>
+
+<span class="sd">    2. **Tangent Space Projection**: The Euclidean gradient is projected onto</span>
+<span class="sd">    the tangent space of SL(n) via</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        Z = \nabla f - \frac{\operatorname{Tr}(M^{-1} \nabla f)}{n} \cdot M</span>
+
+<span class="sd">    keeping :math:`\det(M)` stable throughout.</span>
+
+<span class="sd">    3. **Two-Phase Line Search**: Backtracking first uses a cheap first-order</span>
+<span class="sd">    inverse approximation</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        (M - \alpha Z)^{-1} \approx M^{-1} + \alpha M^{-1} Z M^{-1}</span>
+
+<span class="sd">    to find a candidate step size, then confirms with the exact matrix</span>
+<span class="sd">    exponential retraction.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; opt = MIOptimizer(params=(True, True, False), tol=1e-10)</span>
+<span class="sd">    &gt;&gt;&gt; result = opt.fit_transform(C_data, S_data)</span>
+<span class="sd">    &gt;&gt;&gt; optimal_M = result.x</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">params</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+            <span class="n">max_outer_loop_iters</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+            <span class="n">max_inner_loop_iters</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span>
+            <span class="n">max_line_search_iters</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span>
+            <span class="n">tol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-14</span><span class="p">,</span>
+            <span class="n">gamma</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.02</span><span class="p">,</span>
+            <span class="n">initial_lr</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>
+            <span class="n">filter_half_order</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+            <span class="n">filter_max_lag</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+            <span class="n">lam</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">10.0</span><span class="p">,</span>
+            <span class="n">sparsity_gate_threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="n">params</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_outer_loop_iters</span> <span class="o">=</span> <span class="n">max_outer_loop_iters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_inner_loop_iters</span> <span class="o">=</span> <span class="n">max_inner_loop_iters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_line_search_iters</span> <span class="o">=</span> <span class="n">max_line_search_iters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tol</span> <span class="o">=</span> <span class="n">tol</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="n">gamma</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">initial_lr</span> <span class="o">=</span> <span class="n">initial_lr</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filter_half_order</span> <span class="o">=</span> <span class="n">filter_half_order</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filter_max_lag</span> <span class="o">=</span> <span class="n">filter_max_lag</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lam</span> <span class="o">=</span> <span class="n">lam</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sparsity_gate_threshold</span> <span class="o">=</span> <span class="n">sparsity_gate_threshold</span>
+
+<div class="viewcode-block" id="MIOptimizer.main">
+<a class="viewcode-back" href="../../reference/generated/cnica.MIOptimizer.html#cnica.MIOptimizer.main">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span>
+        <span class="n">M</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> 
+        <span class="n">Sigmas</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+        <span class="n">compute_grad</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FuncResult</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Decorrelation objective: sum of log diagonal variances of transformed</span>
+<span class="sd">        covariances.</span>
+
+<span class="sd">        For each covariance :math:`\Sigma` in `Sigmas` (one per active derivative</span>
+<span class="sd">        order), computes:</span>
+
+<span class="sd">        .. math::</span>
+
+<span class="sd">            f_{\text{main}}(M) = \frac{1}{2} \sum_{\Sigma} \sum_{i}</span>
+<span class="sd">            \log\left([M \Sigma M^T]_{ii} + \epsilon\right)</span>
+
+<span class="sd">        Minimizing this drives :math:`M` toward a transformation where each output</span>
+<span class="sd">        channel has low variance across all derivative orders. This is the</span>
+<span class="sd">        diagonal approximation to the differential entropy of a Gaussian,</span>
+<span class="sd">        where the :math:`1/2` arises from the information-theoretic derivation.</span>
+<span class="sd">        The resulting gradient is :math:`D \cdot M\Sigma`, where</span>
+<span class="sd">        :math:`D = \text{diag}(1 / [M \Sigma M^T]_{ii})`.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        M : np.ndarray</span>
+<span class="sd">            The :math:`(n, n)` linear transformation matrix.</span>
+<span class="sd">        Sigmas : list of np.ndarray</span>
+<span class="sd">            Covariance matrices of the 0th, 1st, or 2nd order derivatives</span>
+<span class="sd">            of the source signals, as selected by `params` in `fit_transform`.</span>
+<span class="sd">            Each must be :math:`(n, n)` and positive semi-definite.</span>
+<span class="sd">        compute_grad : bool, default=True</span>
+<span class="sd">            Whether to compute and return the Euclidean gradient.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        FuncResult</span>
+<span class="sd">            Scalar objective `f` and :math:`(n, n)` gradient `grad`</span>
+<span class="sd">            (:math:`D \cdot M\Sigma`, summed over all :math:`\Sigma`).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">FuncResult</span><span class="p">(</span><span class="n">f</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">compute_grad</span><span class="p">:</span>
+            <span class="n">res</span><span class="o">.</span><span class="n">grad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+        
+        <span class="k">for</span> <span class="n">Sigma</span> <span class="ow">in</span> <span class="n">Sigmas</span><span class="p">:</span>
+            <span class="n">M_Sigma</span> <span class="o">=</span> <span class="n">M</span> <span class="o">@</span> <span class="n">Sigma</span>
+            <span class="n">transformed_Sigma</span> <span class="o">=</span> <span class="n">M_Sigma</span> <span class="o">@</span> <span class="n">M</span><span class="o">.</span><span class="n">T</span>
+            <span class="n">diag_elements</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">transformed_Sigma</span><span class="p">)</span>
+            <span class="n">res</span><span class="o">.</span><span class="n">f</span> <span class="o">+=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">diag_elements</span> <span class="o">+</span> <span class="n">NUMERICAL_EPSILON</span><span class="p">))</span>
+
+            <span class="k">if</span> <span class="n">compute_grad</span><span class="p">:</span>
+                <span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">diag_elements</span> <span class="o">+</span> <span class="n">NUMERICAL_EPSILON</span><span class="p">))</span>
+                <span class="k">assert</span> <span class="n">res</span><span class="o">.</span><span class="n">grad</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+                <span class="n">res</span><span class="o">.</span><span class="n">grad</span> <span class="o">+=</span> <span class="n">D</span> <span class="o">@</span> <span class="n">M_Sigma</span>
+
+        <span class="k">return</span> <span class="n">res</span></div>
+
+
+<div class="viewcode-block" id="MIOptimizer.right_barrier">
+<a class="viewcode-back" href="../../reference/generated/cnica.MIOptimizer.html#cnica.MIOptimizer.right_barrier">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">right_barrier</span><span class="p">(</span>
+        <span class="n">M</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> 
+        <span class="n">S</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">mu</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">compute_grad</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FuncResult</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Log-barrier enforcing the non-negativity constraint :math:`MS &gt; 0`.</span>
+
+<span class="sd">        Computes:</span>
+
+<span class="sd">        .. math::</span>
+
+<span class="sd">            h_R(M) = -\mu \sum_{i,j} \log\left([MS]_{ij} + \delta\right)</span>
+
+<span class="sd">        The barrier approaches :math:`+\infty` as any element of :math:`MS`</span>
+<span class="sd">        approaches :math:`-\delta`, repelling the optimizer from the constraint</span>
+<span class="sd">        boundary and ensuring the transformed source estimates remain non-negative.</span>
+<span class="sd">        Returns :math:`f = \infty` if the current :math:`M` is already infeasible.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        M : np.ndarray</span>
+<span class="sd">            The :math:`(n, n)` transformation matrix.</span>
+<span class="sd">        S : np.ndarray</span>
+<span class="sd">            The :math:`(n, n_S)` constraint matrix (convex hull vertices of the</span>
+<span class="sd">            source estimates).</span>
+<span class="sd">        mu : float</span>
+<span class="sd">            Barrier strength. Reduced each outer iteration via</span>
+<span class="sd">            `BARRIER_COOLING_RATE`.</span>
+<span class="sd">        compute_grad : bool, default=True</span>
+<span class="sd">            Whether to compute the Euclidean gradient</span>
+<span class="sd">            :math:`-\mu \cdot W S^T` where :math:`W_{ij} = 1/([MS]_{ij} + \delta)`.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        FuncResult</span>
+<span class="sd">            Scalar objective `f` and :math:`(n, n)` gradient `grad`.</span>
+<span class="sd">            Returns `f=np.inf` if any element of :math:`MS` violates the</span>
+<span class="sd">            constraint boundary :math:`-\delta`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">M_S</span> <span class="o">=</span> <span class="n">M</span> <span class="o">@</span> <span class="n">S</span>
+
+        <span class="c1"># Infeasible: any entry has crossed the barrier boundary at -delta</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">M_S</span> <span class="o">&lt;</span> <span class="o">-</span><span class="n">BARRIER_DELTA</span> <span class="o">+</span> <span class="n">NUMERICAL_EPSILON</span><span class="p">):</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">FuncResult</span><span class="p">(</span><span class="n">f</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">compute_grad</span><span class="p">:</span>
+                <span class="n">res</span><span class="o">.</span><span class="n">grad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">res</span>
+
+        <span class="n">res</span> <span class="o">=</span> <span class="n">FuncResult</span><span class="p">(</span><span class="n">f</span><span class="o">=-</span><span class="n">mu</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">M_S</span> <span class="o">+</span> <span class="n">BARRIER_DELTA</span><span class="p">)))</span>
+
+        <span class="k">if</span> <span class="n">compute_grad</span><span class="p">:</span>
+            <span class="n">W</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">M_S</span> <span class="o">+</span> <span class="n">BARRIER_DELTA</span><span class="p">)</span>
+            <span class="n">res</span><span class="o">.</span><span class="n">grad</span> <span class="o">=</span> <span class="o">-</span><span class="n">mu</span> <span class="o">*</span> <span class="p">(</span><span class="n">W</span> <span class="o">@</span> <span class="n">S</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+       
+        <span class="k">return</span> <span class="n">res</span></div>
+
+
+<div class="viewcode-block" id="MIOptimizer.left_barrier">
+<a class="viewcode-back" href="../../reference/generated/cnica.MIOptimizer.html#cnica.MIOptimizer.left_barrier">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">left_barrier</span><span class="p">(</span>
+        <span class="n">inv_M</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> 
+        <span class="n">C</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">mu</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">compute_grad</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FuncResult</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Log-barrier enforcing the non-negativity constraint :math:`M^{-T}C &gt; 0`.</span>
+
+<span class="sd">        Computes:</span>
+
+<span class="sd">        .. math::</span>
+
+<span class="sd">            h_L(M) = -\mu \sum_{i,j} \log\left([M^{-T}C]_{ij} + \delta\right)</span>
+
+<span class="sd">        This is the dual constraint to :math:`MS &gt; 0`: it ensures that the columns</span>
+<span class="sd">        of :math:`C`, when mapped by the inverse transformation :math:`M^{-T}`,</span>
+<span class="sd">        remain non-negative. Returns :math:`f = \infty` if the current :math:`M`</span>
+<span class="sd">        is already infeasible.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        inv_M : np.ndarray</span>
+<span class="sd">            The :math:`(n, n)` inverse of the transformation matrix :math:`M`.</span>
+<span class="sd">        C : np.ndarray</span>
+<span class="sd">            The :math:`(n, n_C)` constraint matrix (convex hull vertices of the</span>
+<span class="sd">            mixing matrix columns).</span>
+<span class="sd">        mu : float</span>
+<span class="sd">            Barrier strength. Reduced each outer iteration via</span>
+<span class="sd">            `BARRIER_COOLING_RATE`.</span>
+<span class="sd">        compute_grad : bool, default=True</span>
+<span class="sd">            Whether to compute the Euclidean gradient with respect to :math:`M`,</span>
+<span class="sd">            derived via</span>
+<span class="sd">            :math:`\partial M^{-1}/\partial M \cdot dM = -M^{-1} dM\, M^{-1}`:</span>
+
+<span class="sd">            .. math::</span>
+
+<span class="sd">                \frac{\partial h_L}{\partial M} = \mu \left(M^{-T}C\right) V^T M^{-T}</span>
+
+<span class="sd">            where :math:`V_{ij} = 1 / ([M^{-T}C]_{ij} + \delta)`.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        FuncResult</span>
+<span class="sd">            Scalar objective `f` and :math:`(n, n)` gradient `grad`.</span>
+<span class="sd">            Returns `f=np.inf` if any element of :math:`M^{-T}C` violates the</span>
+<span class="sd">            constraint boundary :math:`-\delta`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">inv_MT</span> <span class="o">=</span> <span class="n">inv_M</span><span class="o">.</span><span class="n">T</span>
+        <span class="n">inv_MT_C</span> <span class="o">=</span> <span class="n">inv_MT</span> <span class="o">@</span> <span class="n">C</span>
+
+        <span class="c1"># Check feasibility</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">inv_MT_C</span> <span class="o">&lt;</span> <span class="o">-</span><span class="n">BARRIER_DELTA</span> <span class="o">+</span> <span class="n">NUMERICAL_EPSILON</span><span class="p">):</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">FuncResult</span><span class="p">(</span><span class="n">f</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">compute_grad</span><span class="p">:</span>
+                <span class="n">res</span><span class="o">.</span><span class="n">grad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">inv_M</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">res</span>
+
+        <span class="c1"># Value of the barrier function</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">FuncResult</span><span class="p">(</span><span class="n">f</span><span class="o">=-</span><span class="n">mu</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">inv_MT_C</span> <span class="o">+</span> <span class="n">BARRIER_DELTA</span><span class="p">)))</span>
+
+        <span class="c1"># Gradient of the barrier function</span>
+        <span class="k">if</span> <span class="n">compute_grad</span><span class="p">:</span>
+            <span class="n">V</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">inv_MT_C</span> <span class="o">+</span> <span class="n">BARRIER_DELTA</span><span class="p">)</span>
+            <span class="n">res</span><span class="o">.</span><span class="n">grad</span> <span class="o">=</span> <span class="n">mu</span> <span class="o">*</span> <span class="p">(</span><span class="n">inv_MT_C</span> <span class="o">@</span> <span class="n">V</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">inv_MT</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">res</span></div>
+
+
+<div class="viewcode-block" id="MIOptimizer.sparse_norm">
+<a class="viewcode-back" href="../../reference/generated/cnica.MIOptimizer.html#cnica.MIOptimizer.sparse_norm">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sparse_norm</span><span class="p">(</span>
+        <span class="n">M</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">S_sums</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">S_gram</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">lam</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">n_samples</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">sparsity_gate_threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+        <span class="n">compute_grad</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FuncResult</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &#39;Safe-Plateau&#39; sparsity regularizer based on a gated Hoyer density.</span>
+
+<span class="sd">        For each row :math:`c` of :math:`MS`, computes the Hoyer normalized density:</span>
+
+<span class="sd">        .. math::</span>
+
+<span class="sd">            d_c = \frac{\|MS_c\|_1 / \|MS_c\|_2 - 1}{\sqrt{N} - 1} \in [0, 1]</span>
+
+<span class="sd">        where :math:`d_c = 0` is maximally sparse (one nonzero) and :math:`d_c = 1`</span>
+<span class="sd">        is maximally dense (uniform). A negative softplus gate then rewards sparse</span>
+<span class="sd">        rows while protecting dense ones:</span>
+
+<span class="sd">        .. math::</span>
+
+<span class="sd">            f_s(M) = -\frac{\lambda}{k} \sum_c</span>
+<span class="sd">            \log\left(1 + e^{k(\beta - d_c)}\right)</span>
+
+<span class="sd">        When :math:`d_c \ll \beta` the gate is open and the objective is a large</span>
+<span class="sd">        negative number, rewarding the optimizer for preserving sparse (peaky) rows.</span>
+<span class="sd">        When :math:`d_c \gg \beta` the gate saturates and the term vanishes,</span>
+<span class="sd">        leaving dense rows (e.g. sine waves) governed solely by the decorrelation</span>
+<span class="sd">        objective.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        M : np.ndarray</span>
+<span class="sd">            The :math:`(n, n)` transformation matrix.</span>
+<span class="sd">        S_sums : np.ndarray</span>
+<span class="sd">            Row sums of the source matrix: :math:`S \mathbf{1} / N`, length :math:`n`.</span>
+<span class="sd">            Used to efficiently compute :math:`\|MS\|_1` without forming :math:`MS`.</span>
+<span class="sd">        S_gram : np.ndarray</span>
+<span class="sd">            Normalised Gram matrix :math:`SS^T / N`, shape :math:`(n, n)`.</span>
+<span class="sd">            Used to efficiently compute :math:`\|MS\|_2` without forming :math:`MS`.</span>
+<span class="sd">        lam : float</span>
+<span class="sd">            Regularization strength. Set to 0 to disable entirely.</span>
+<span class="sd">        n_samples : int</span>
+<span class="sd">            Number of columns in :math:`S`, used to normalize the Hoyer density.</span>
+<span class="sd">        sparsity_gate_threshold : float, default=0.5</span>
+<span class="sd">            Midpoint :math:`\beta` of the sigmoid gate. Rows with density below</span>
+<span class="sd">            this value are penalized; rows above it are protected.</span>
+<span class="sd">        compute_grad : bool, default=True</span>
+<span class="sd">            Whether to compute the gradient with respect to :math:`M`.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        FuncResult</span>
+<span class="sd">            Scalar objective `f` and :math:`(n, n)` gradient `grad`.</span>
+<span class="sd">            Returns `f=0, grad=0` if `lam &lt;= 0`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">lam</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">FuncResult</span><span class="p">(</span>
+                <span class="n">f</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+                <span class="n">grad</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">M</span><span class="p">)</span> <span class="k">if</span> <span class="n">compute_grad</span> <span class="k">else</span> <span class="kc">None</span>
+            <span class="p">)</span>
+
+        <span class="c1"># L1 norm per row: ||MS_c||_1 = M @ S_sums</span>
+        <span class="n">num_vec</span> <span class="o">=</span> <span class="n">M</span> <span class="o">@</span> <span class="n">S_sums</span>
+
+        <span class="c1"># L2 norm per row: ||MS_c||_2 = sqrt(diag(M @ S_gram @ M^T))</span>
+        <span class="n">M_Sgram</span> <span class="o">=</span> <span class="n">M</span> <span class="o">@</span> <span class="n">S_gram</span>
+        <span class="n">denom2_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">M_Sgram</span> <span class="o">*</span> <span class="n">M</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">denom_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">denom2_vec</span><span class="p">)</span> <span class="o">+</span> <span class="n">NUMERICAL_EPSILON</span>
+
+        <span class="c1"># Hoyer normalized density d_c in [0, 1]</span>
+        <span class="n">hoyer_scale</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span>
+        <span class="n">ratio_vec</span> <span class="o">=</span> <span class="n">num_vec</span> <span class="o">/</span> <span class="n">denom_vec</span>
+        <span class="n">d_c</span> <span class="o">=</span> <span class="n">hoyer_scale</span> <span class="o">*</span> <span class="p">(</span><span class="n">ratio_vec</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span>
+
+        <span class="c1"># Negative softplus gate, numerically stable via logaddexp</span>
+        <span class="c1"># f = -(lam/k) * sum(log(1 + exp(k * (beta - d_c))))</span>
+        <span class="n">diff</span> <span class="o">=</span> <span class="n">SPARSITY_GATE_STEEPNESS</span> <span class="o">*</span> <span class="p">(</span><span class="n">sparsity_gate_threshold</span> <span class="o">-</span> <span class="n">d_c</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">lam</span> <span class="o">/</span> <span class="n">SPARSITY_GATE_STEEPNESS</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">logaddexp</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">diff</span><span class="p">))</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">FuncResult</span><span class="p">(</span><span class="n">f</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">compute_grad</span><span class="p">:</span>
+            <span class="c1"># Sigmoid gate: d/d(diff) of -log(1 + exp(diff)) = -sigma(diff)</span>
+            <span class="n">gates</span> <span class="o">=</span> <span class="n">lam</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">diff</span><span class="p">))</span>
+            <span class="n">scalars</span> <span class="o">=</span> <span class="n">hoyer_scale</span> <span class="o">*</span> <span class="n">gates</span> <span class="o">/</span> <span class="n">denom_vec</span>
+
+            <span class="c1"># Gradient of L1 term: d/dM ||MS||_1 = S_sums^T (outer product per row)</span>
+            <span class="n">grad_L1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">scalars</span><span class="p">,</span> <span class="n">S_sums</span><span class="p">)</span>
+
+            <span class="c1"># Gradient of L2 term via quotient rule: (L1/L2^2) * M @ S_gram</span>
+            <span class="n">l2_scalars</span> <span class="o">=</span> <span class="n">ratio_vec</span> <span class="o">/</span> <span class="n">denom_vec</span>
+            <span class="n">grad_L2</span> <span class="o">=</span> <span class="p">(</span><span class="n">scalars</span> <span class="o">*</span> <span class="n">l2_scalars</span><span class="p">)[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">*</span> <span class="n">M_Sgram</span>
+
+            <span class="n">res</span><span class="o">.</span><span class="n">grad</span> <span class="o">=</span> <span class="n">grad_L1</span> <span class="o">-</span> <span class="n">grad_L2</span>
+
+        <span class="k">return</span> <span class="n">res</span></div>
+
+
+<div class="viewcode-block" id="MIOptimizer.f">
+<a class="viewcode-back" href="../../reference/generated/cnica.MIOptimizer.html#cnica.MIOptimizer.f">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span>
+        <span class="n">M</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">inv_M</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">Sigmas</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+        <span class="n">C</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">S</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">mu</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">S_sums</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">S_gram</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">lam</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">n_samples</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">sparsity_gate_threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+        <span class="n">compute_grad</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FuncResult</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Total objective and its projection onto the tangent space of :math:`SL(n)`.</span>
+
+<span class="sd">        Computes:</span>
+
+<span class="sd">        .. math::</span>
+
+<span class="sd">            f(M) = f_{\text{main}}(M) + h_R(M) + h_L(M) + f_s(M)</span>
+
+<span class="sd">        When `compute_grad=True`, the summed Euclidean gradient :math:`\nabla f` is</span>
+<span class="sd">        projected onto the tangent space by removing the component that would</span>
+<span class="sd">        change :math:`\det(M)`:</span>
+
+<span class="sd">        .. math::</span>
+
+<span class="sd">            Z = \nabla f - \frac{\operatorname{Tr}(M^{-1} \nabla f)}{n} \cdot M</span>
+
+<span class="sd">        This is derived by solving :math:`\operatorname{Tr}(M^{-1} Z) = 0` with the</span>
+<span class="sd">        ansatz :math:`Z = \nabla f - cM`, which gives</span>
+<span class="sd">        :math:`c = \operatorname{Tr}(M^{-1} \nabla f) / \operatorname{Tr}(I_n) =</span>
+<span class="sd">        \operatorname{Tr}(M^{-1} \nabla f) / n`.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        M : np.ndarray</span>
+<span class="sd">            Current :math:`(n, n)` transformation matrix.</span>
+<span class="sd">        inv_M : np.ndarray</span>
+<span class="sd">            Inverse of :math:`M`, shape :math:`(n, n)`.</span>
+<span class="sd">        Sigmas : list of np.ndarray</span>
+<span class="sd">            Covariance matrices of the source signals and their derivatives,</span>
+<span class="sd">            each of shape :math:`(n, n)`.</span>
+<span class="sd">        C : np.ndarray</span>
+<span class="sd">            :math:`(n, n_C)` left constraint matrix (convex hull vertices).</span>
+<span class="sd">        S : np.ndarray</span>
+<span class="sd">            :math:`(n, n_S)` right constraint matrix (convex hull vertices).</span>
+<span class="sd">        mu : float</span>
+<span class="sd">            Current barrier strength.</span>
+<span class="sd">        S_sums : np.ndarray</span>
+<span class="sd">            Row sums of the source matrix, length :math:`n`.</span>
+<span class="sd">        S_gram : np.ndarray</span>
+<span class="sd">            Normalised Gram matrix :math:`SS^T / N`, shape :math:`(n, n)`.</span>
+<span class="sd">        lam : float</span>
+<span class="sd">            Sparsity regularization strength.</span>
+<span class="sd">        n_samples : int</span>
+<span class="sd">            Number of columns in :math:`S`.</span>
+<span class="sd">        sparsity_gate_threshold : float, default=0.5</span>
+<span class="sd">            Passed through to `sparse_norm` as the sigmoid gate midpoint :math:`\beta`.</span>
+<span class="sd">        compute_grad : bool, default=True</span>
+<span class="sd">            Whether to compute the projected tangent gradient :math:`Z`.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        FuncResult</span>
+<span class="sd">            Scalar objective `f` and projected tangent gradient `grad` :math:`Z`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">res_m</span> <span class="o">=</span> <span class="n">MIOptimizer</span><span class="o">.</span><span class="n">main</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">Sigmas</span><span class="p">,</span> <span class="n">compute_grad</span><span class="o">=</span><span class="n">compute_grad</span><span class="p">)</span>
+        <span class="n">res_r</span> <span class="o">=</span> <span class="n">MIOptimizer</span><span class="o">.</span><span class="n">right_barrier</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">compute_grad</span><span class="o">=</span><span class="n">compute_grad</span><span class="p">)</span>
+        <span class="n">res_l</span> <span class="o">=</span> <span class="n">MIOptimizer</span><span class="o">.</span><span class="n">left_barrier</span><span class="p">(</span><span class="n">inv_M</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">compute_grad</span><span class="o">=</span><span class="n">compute_grad</span><span class="p">)</span>
+        <span class="n">res_s</span> <span class="o">=</span> <span class="n">MIOptimizer</span><span class="o">.</span><span class="n">sparse_norm</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">S_sums</span><span class="p">,</span> <span class="n">S_gram</span><span class="p">,</span> <span class="n">lam</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">,</span>
+                                        <span class="n">sparsity_gate_threshold</span><span class="p">,</span>
+                                        <span class="n">compute_grad</span><span class="o">=</span><span class="n">compute_grad</span><span class="p">)</span>
+
+        <span class="n">res</span> <span class="o">=</span> <span class="n">FuncResult</span><span class="p">(</span><span class="n">f</span><span class="o">=</span><span class="n">res_m</span><span class="o">.</span><span class="n">f</span> <span class="o">+</span> <span class="n">res_r</span><span class="o">.</span><span class="n">f</span> <span class="o">+</span> <span class="n">res_l</span><span class="o">.</span><span class="n">f</span> <span class="o">+</span> <span class="n">res_s</span><span class="o">.</span><span class="n">f</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">compute_grad</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="p">(</span><span class="n">res_m</span><span class="o">.</span><span class="n">grad</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">res_r</span><span class="o">.</span><span class="n">grad</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+                    <span class="ow">and</span> <span class="n">res_l</span><span class="o">.</span><span class="n">grad</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">res_s</span><span class="o">.</span><span class="n">grad</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">),</span> \
+                    <span class="s2">&quot;All gradients must be computed&quot;</span>
+            <span class="n">grad</span> <span class="o">=</span> <span class="n">res_m</span><span class="o">.</span><span class="n">grad</span> <span class="o">+</span> <span class="n">res_r</span><span class="o">.</span><span class="n">grad</span> <span class="o">+</span> <span class="n">res_l</span><span class="o">.</span><span class="n">grad</span> <span class="o">+</span> <span class="n">res_s</span><span class="o">.</span><span class="n">grad</span>
+
+            <span class="c1"># Project onto the tangent space of SL(n): remove the det-changing</span>
+            <span class="c1"># component so Tr(M^{-1} Z) = 0</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">proj_term</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="n">inv_M</span> <span class="o">@</span> <span class="n">grad</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span>
+            <span class="n">res</span><span class="o">.</span><span class="n">grad</span> <span class="o">=</span> <span class="n">grad</span> <span class="o">-</span> <span class="n">proj_term</span> <span class="o">*</span> <span class="n">M</span>
+
+        <span class="k">return</span> <span class="n">res</span></div>
+
+
+<div class="viewcode-block" id="MIOptimizer.optimize_step">
+<a class="viewcode-back" href="../../reference/generated/cnica.MIOptimizer.html#cnica.MIOptimizer.optimize_step">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">optimize_step</span><span class="p">(</span>
+        <span class="n">M</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">inv_M</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">Sigmas</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+        <span class="n">C</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">S</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">mu</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">S_sums</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">S_gram</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">lam</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">n_samples</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">sparsity_gate_threshold</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">initial_lr</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">max_line_search_iters</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Single Riemannian descent step via two-phase backtracking line search.</span>
+
+<span class="sd">        **Phase 1 — Linearized backtracking:** Uses the first-order Taylor</span>
+<span class="sd">        approximation of the matrix inverse to cheaply find a step size</span>
+<span class="sd">        :math:`\alpha` satisfying the Armijo sufficient decrease condition:</span>
+
+<span class="sd">        .. math::</span>
+
+<span class="sd">            (M - \alpha Z)^{-1} \approx M^{-1} + \alpha M^{-1} Z M^{-1}</span>
+
+<span class="sd">        **Phase 2 — Manifold retraction:** Confirms the step using the exact</span>
+<span class="sd">        matrix exponential retraction, starting from the :math:`\alpha` found in</span>
+<span class="sd">        Phase 1 and continuing to backtrack if needed:</span>
+
+<span class="sd">        .. math::</span>
+
+<span class="sd">            M_{\text{new}} = M \exp(-\alpha \Omega), \quad</span>
+<span class="sd">            M_{\text{new}}^{-1} = \exp(\alpha \Omega) M^{-1}</span>
+
+<span class="sd">        where :math:`\Omega = M^{-1} Z` is the descent direction in the Lie algebra.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        M : np.ndarray</span>
+<span class="sd">            Current :math:`(n, n)` transformation matrix.</span>
+<span class="sd">        inv_M : np.ndarray</span>
+<span class="sd">            Inverse of :math:`M`, shape :math:`(n, n)`.</span>
+<span class="sd">        Sigmas : list of np.ndarray</span>
+<span class="sd">            Covariance matrices of the source signals and their derivatives,</span>
+<span class="sd">            each of shape :math:`(n, n)`.</span>
+<span class="sd">        C : np.ndarray</span>
+<span class="sd">            :math:`(n, n_C)` left constraint matrix (convex hull vertices).</span>
+<span class="sd">        S : np.ndarray</span>
+<span class="sd">            :math:`(n, n_S)` right constraint matrix (convex hull vertices).</span>
+<span class="sd">        mu : float</span>
+<span class="sd">            Current barrier strength.</span>
+<span class="sd">        S_sums : np.ndarray</span>
+<span class="sd">            Row sums of the source matrix, length :math:`n`.</span>
+<span class="sd">        S_gram : np.ndarray</span>
+<span class="sd">            Normalised Gram matrix :math:`SS^T / N`, shape :math:`(n, n)`.</span>
+<span class="sd">        lam : float</span>
+<span class="sd">            Sparsity regularization strength.</span>
+<span class="sd">        n_samples : int</span>
+<span class="sd">            Number of columns in :math:`S`.</span>
+<span class="sd">        sparsity_gate_threshold : float</span>
+<span class="sd">            Sigmoid gate midpoint :math:`\beta` passed through to `sparse_norm`.</span>
+<span class="sd">        initial_lr : float</span>
+<span class="sd">            Starting step size :math:`\alpha` for backtracking.</span>
+<span class="sd">        max_line_search_iters : int</span>
+<span class="sd">            Maximum number of backtracking steps in each phase before</span>
+<span class="sd">            declaring failure.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        success : bool</span>
+<span class="sd">            True if a descent step satisfying the Armijo condition was found.</span>
+<span class="sd">        M_new : np.ndarray</span>
+<span class="sd">            Updated transformation matrix (unchanged if `success=False`).</span>
+<span class="sd">        inv_M_new : np.ndarray</span>
+<span class="sd">            Inverse of `M_new` (unchanged if `success=False`).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">MIOptimizer</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">inv_M</span><span class="p">,</span> <span class="n">Sigmas</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">S_sums</span><span class="p">,</span> <span class="n">S_gram</span><span class="p">,</span> <span class="n">lam</span><span class="p">,</span>
+                            <span class="n">n_samples</span><span class="p">,</span> <span class="n">sparsity_gate_threshold</span><span class="p">)</span>
+        <span class="n">f_curr</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">f</span>
+        <span class="n">Z</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">grad</span>
+        <span class="k">assert</span> <span class="n">Z</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;Gradient must be computed for optimization step&quot;</span>
+
+        <span class="c1"># Descent direction in the Lie algebra: Omega = M^{-1} Z</span>
+        <span class="n">Omega</span> <span class="o">=</span> <span class="n">inv_M</span> <span class="o">@</span> <span class="n">Z</span>
+        <span class="n">norm_Z_sq</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Z</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">Z</span><span class="o">.</span><span class="n">ravel</span><span class="p">()))</span>
+
+        <span class="c1"># Precompute the alpha coefficient of the inverse Taylor expansion:</span>
+        <span class="c1"># (M - alpha Z)^{-1} approx M^{-1} + alpha * inv_M_Z_inv_M</span>
+        <span class="n">inv_M_Z_inv_M</span> <span class="o">=</span> <span class="n">Omega</span> <span class="o">@</span> <span class="n">inv_M</span>
+
+        <span class="c1"># Phase 1: Linearized backtracking to find a candidate alpha</span>
+        <span class="n">alpha</span> <span class="o">=</span> <span class="n">initial_lr</span>
+        <span class="n">found_step</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_line_search_iters</span><span class="p">):</span>
+            <span class="n">M_try</span> <span class="o">=</span> <span class="n">M</span> <span class="o">-</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">Z</span>
+            <span class="n">inv_M_try</span> <span class="o">=</span> <span class="n">inv_M</span> <span class="o">+</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">inv_M_Z_inv_M</span>
+
+            <span class="n">res_try</span> <span class="o">=</span> <span class="n">MIOptimizer</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">M_try</span><span class="p">,</span> <span class="n">inv_M_try</span><span class="p">,</span> <span class="n">Sigmas</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span>
+                                    <span class="n">S_sums</span><span class="p">,</span> <span class="n">S_gram</span><span class="p">,</span> <span class="n">lam</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">,</span>
+                                    <span class="n">sparsity_gate_threshold</span><span class="p">,</span>
+                                    <span class="n">compute_grad</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">res_try</span><span class="o">.</span><span class="n">f</span> <span class="o">&lt;</span> <span class="n">f_curr</span> <span class="o">-</span> <span class="n">ARMIJO_SUFFICIENT_DECREASE</span> <span class="o">*</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">norm_Z_sq</span><span class="p">:</span>
+                <span class="n">found_step</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">break</span>
+            <span class="n">alpha</span> <span class="o">*=</span> <span class="n">LINE_SEARCH_BACKTRACK_FACTOR</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">found_step</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">inv_M</span>
+        
+        <span class="c1"># Phase 2: Exact manifold retraction, starting from alpha found in Phase 1</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_line_search_iters</span><span class="p">):</span>
+            <span class="n">M_try</span> <span class="o">=</span> <span class="n">M</span> <span class="o">@</span> <span class="n">expm</span><span class="p">(</span><span class="o">-</span><span class="n">alpha</span> <span class="o">*</span> <span class="n">Omega</span><span class="p">)</span>
+            <span class="n">inv_M_try</span> <span class="o">=</span> <span class="n">expm</span><span class="p">(</span><span class="n">alpha</span> <span class="o">*</span> <span class="n">Omega</span><span class="p">)</span> <span class="o">@</span> <span class="n">inv_M</span>
+
+            <span class="n">res_try</span> <span class="o">=</span> <span class="n">MIOptimizer</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">M_try</span><span class="p">,</span> <span class="n">inv_M_try</span><span class="p">,</span> <span class="n">Sigmas</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span>
+                                    <span class="n">S_sums</span><span class="p">,</span> <span class="n">S_gram</span><span class="p">,</span> <span class="n">lam</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">,</span>
+                                    <span class="n">sparsity_gate_threshold</span><span class="p">,</span>
+                                    <span class="n">compute_grad</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">res_try</span><span class="o">.</span><span class="n">f</span> <span class="o">&lt;</span> <span class="n">f_curr</span> <span class="o">-</span> <span class="n">ARMIJO_SUFFICIENT_DECREASE</span> <span class="o">*</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">norm_Z_sq</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="n">M_try</span><span class="p">,</span> <span class="n">inv_M_try</span>
+            <span class="n">alpha</span> <span class="o">*=</span> <span class="n">LINE_SEARCH_BACKTRACK_FACTOR</span>
+
+        <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">inv_M</span></div>
+
+    
+<div class="viewcode-block" id="MIOptimizer.normalize">
+<a class="viewcode-back" href="../../reference/generated/cnica.MIOptimizer.html#cnica.MIOptimizer.normalize">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">normalize</span><span class="p">(</span>
+        <span class="n">C</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">S</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Rescales :math:`C` and :math:`S` so that their row variances are balanced</span>
+<span class="sd">        across the left and right barrier terms, and both matrices have unit</span>
+<span class="sd">        standard deviation.</span>
+
+<span class="sd">        Computes two diagonal scaling matrices :math:`\Lambda_C` and</span>
+<span class="sd">        :math:`\Lambda_S` such that:</span>
+
+<span class="sd">        .. math::</span>
+
+<span class="sd">            C_{\text{norm}} = \Lambda_C \cdot C, \quad</span>
+<span class="sd">            S_{\text{norm}} = \Lambda_S \cdot S</span>
+
+<span class="sd">        The scaling has two components applied sequentially:</span>
+
+<span class="sd">        1. **Barrier balancing:** :math:`\lambda_i = (\text{Var}(C_i) /</span>
+<span class="sd">        \text{Var}(S_i))^{1/4}` distributes the variance ratio evenly</span>
+<span class="sd">        between :math:`C` and :math:`S` in log-space, equalizing barrier</span>
+<span class="sd">        gradient magnitudes.</span>
+
+<span class="sd">        2. **Std normalization:** both matrices are divided by their global</span>
+<span class="sd">        standard deviation so typical entry magnitudes are :math:`O(1)`,</span>
+<span class="sd">        making `BARRIER_DELTA` meaningful across datasets of different scales.</span>
+
+<span class="sd">        The scaling matrices allow the transformation to be inverted exactly:</span>
+
+<span class="sd">        .. math::</span>
+
+<span class="sd">            C = \Lambda_C^{-1} C_{\text{norm}}, \quad</span>
+<span class="sd">            S = \Lambda_S^{-1} S_{\text{norm}}</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        C : np.ndarray</span>
+<span class="sd">            :math:`(n, n_C)` left constraint matrix.</span>
+<span class="sd">        S : np.ndarray</span>
+<span class="sd">            :math:`(n, n_S)` right constraint matrix.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        C_norm : np.ndarray</span>
+<span class="sd">            Normalized version of :math:`C`, shape :math:`(n, n_C)`.</span>
+<span class="sd">        S_norm : np.ndarray</span>
+<span class="sd">            Normalized version of :math:`S`, shape :math:`(n, n_S)`.</span>
+<span class="sd">        Lambda_C : np.ndarray</span>
+<span class="sd">            :math:`(n, n)` diagonal scaling matrix for :math:`C`.</span>
+<span class="sd">        Lambda_S : np.ndarray</span>
+<span class="sd">            :math:`(n, n)` diagonal scaling matrix for :math:`S`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Step 1: Barrier balancing via row variance ratio</span>
+        <span class="n">diag</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">C</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">S</span><span class="p">))</span> <span class="o">+</span> <span class="n">NUMERICAL_EPSILON</span><span class="p">)</span>
+        <span class="n">row_scale</span> <span class="o">=</span> <span class="n">diag</span> <span class="o">**</span> <span class="mf">0.25</span>
+        <span class="n">C_norm</span> <span class="o">=</span> <span class="n">C</span> <span class="o">/</span> <span class="n">row_scale</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span>
+        <span class="n">S_norm</span> <span class="o">=</span> <span class="n">S</span> <span class="o">*</span> <span class="n">row_scale</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span>
+
+        <span class="c1"># Step 2: Global std normalization so entries are O(1)</span>
+        <span class="n">scale_C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">C_norm</span><span class="p">)</span> <span class="o">+</span> <span class="n">NUMERICAL_EPSILON</span>
+        <span class="n">scale_S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">S_norm</span><span class="p">)</span> <span class="o">+</span> <span class="n">NUMERICAL_EPSILON</span>
+        <span class="n">C_norm</span> <span class="o">=</span> <span class="n">C_norm</span> <span class="o">/</span> <span class="n">scale_C</span>
+        <span class="n">S_norm</span> <span class="o">=</span> <span class="n">S_norm</span> <span class="o">/</span> <span class="n">scale_S</span>
+
+        <span class="c1"># Compose both steps into single diagonal scaling matrices</span>
+        <span class="c1"># Lambda_C @ C = C_norm, Lambda_S @ S = S_norm</span>
+        <span class="n">Lambda_C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">row_scale</span> <span class="o">*</span> <span class="n">scale_C</span><span class="p">))</span>
+        <span class="n">Lambda_S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">row_scale</span> <span class="o">/</span> <span class="n">scale_S</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">C_norm</span><span class="p">,</span> <span class="n">S_norm</span><span class="p">,</span> <span class="n">Lambda_C</span><span class="p">,</span> <span class="n">Lambda_S</span></div>
+
+
+<div class="viewcode-block" id="MIOptimizer.get_covariances">
+<a class="viewcode-back" href="../../reference/generated/cnica.MIOptimizer.html#cnica.MIOptimizer.get_covariances">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_covariances</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">S</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+            <span class="n">params</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">bool</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Covariance matrices of :math:`S` and its filtered temporal derivatives.</span>
+
+<span class="sd">        For each active flag in `params`, computes the :math:`(n, n)` covariance</span>
+<span class="sd">        matrix of the corresponding derivative of :math:`S`. All orders are</span>
+<span class="sd">        computed on the band-limited signal via unsupervised Parks-McClellan FIR</span>
+<span class="sd">        filters tuned by minimizing the MSRAC of the rejected band, ensuring</span>
+<span class="sd">        consistent frequency content across all covariance matrices.</span>
+
+<span class="sd">        If the signal is too short to apply filtering safely, all orders fall</span>
+<span class="sd">        back to using the raw (unfiltered) signal.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        S : np.ndarray</span>
+<span class="sd">            :math:`(n, n_{\text{samples}})` source signal matrix, one row per</span>
+<span class="sd">            channel.</span>
+<span class="sd">        params : tuple</span>
+<span class="sd">            Flags selecting which derivative orders to include:</span>
+<span class="sd">            ``(use_0th, use_1st, use_2nd)``. At least one must be True.</span>
+<span class="sd">            Multiple True flags produce multiple covariance matrices, all</span>
+<span class="sd">            included in the returned list.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list of np.ndarray</span>
+<span class="sd">            Covariance matrices of shape :math:`(n, n)`, one per active flag in</span>
+<span class="sd">            `params`, in order of derivative order.</span>
+
+<span class="sd">        Warns</span>
+<span class="sd">        -----</span>
+<span class="sd">        UserWarning</span>
+<span class="sd">            If :math:`n_{\text{samples}} &lt; 2m + \text{max_{\text{lag}}} + 1`, the signal</span>
+<span class="sd">            is too short to filter safely. All derivative orders fall back to</span>
+<span class="sd">            raw (unfiltered) covariances.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">n</span><span class="p">,</span> <span class="n">n_samples</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_half_order</span>
+        <span class="n">max_lag</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_max_lag</span>
+        <span class="n">covariances</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Orders 0 and 1 both trim m samples from each end, making</span>
+        <span class="c1"># 2m + max_lag + 1 the binding minimum length constraint.</span>
+        <span class="n">min_samples</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">m</span> <span class="o">+</span> <span class="n">max_lag</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">n_samples</span> <span class="o">&lt;</span> <span class="n">min_samples</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Signal length (</span><span class="si">{</span><span class="n">n_samples</span><span class="si">}</span><span class="s2">) is too short for filtering &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;(need </span><span class="si">{</span><span class="n">min_samples</span><span class="si">}</span><span class="s2">). Falling back to raw covariances for &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;all orders. Consider reducing filter_half_order or &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;filter_max_lag.&quot;</span>
+            <span class="p">)</span>
+            <span class="n">covariances</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">S</span><span class="p">)]</span>
+            <span class="k">return</span> <span class="n">covariances</span>
+
+        <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">use_derivative</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">use_derivative</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="n">trimmed_len</span> <span class="o">=</span> <span class="n">n_samples</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">m</span>
+            <span class="n">filtered_S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">trimmed_len</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+                <span class="n">filt</span> <span class="o">=</span> <span class="n">Filter</span><span class="p">(</span><span class="n">m</span><span class="o">=</span><span class="n">m</span><span class="p">,</span> <span class="n">max_lag</span><span class="o">=</span><span class="n">max_lag</span><span class="p">,</span> <span class="n">trim</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">filtered_S</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">filt</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="n">index</span><span class="p">)</span>
+            <span class="n">covariances</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">filtered_S</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">covariances</span></div>
+
+
+<div class="viewcode-block" id="MIOptimizer.prune">
+<a class="viewcode-back" href="../../reference/generated/cnica.MIOptimizer.html#cnica.MIOptimizer.prune">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">prune</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">data</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">gamma</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.01</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Removes low-magnitude points clustered near the origin.</span>
+
+<span class="sd">        Two thresholds are computed and the minimum is taken as the effective</span>
+<span class="sd">        cutoff, protecting against outliers inflating the max-based threshold</span>
+<span class="sd">        and against dense origin clusters inflating the percentile-based one:</span>
+
+<span class="sd">        - Percentile threshold: the :math:`\gamma`-percentile of point magnitudes.</span>
+<span class="sd">        - Max threshold: :math:`\gamma \times \max(\|x\|)`.</span>
+
+<span class="sd">        Points with magnitude below the effective threshold are removed. If</span>
+<span class="sd">        pruning would leave fewer than :math:`d + 1` points (the minimum for a</span>
+<span class="sd">        non-degenerate convex hull in :math:`d` dimensions), the original data</span>
+<span class="sd">        is returned unchanged.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        data : np.ndarray</span>
+<span class="sd">            :math:`(d, N)` data matrix.</span>
+<span class="sd">        gamma : float, default=0.01</span>
+<span class="sd">            Controls the pruning threshold as a fraction of the data&#39;s</span>
+<span class="sd">            magnitude range. Larger values prune more aggressively.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        np.ndarray</span>
+<span class="sd">            Pruned data matrix of shape :math:`(d, N&#39;)` where :math:`N&#39; \leq N`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">d</span><span class="p">,</span> <span class="n">N</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span>
+        <span class="k">if</span> <span class="n">N</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">data</span>
+
+        <span class="n">mags</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">thresh_percentile</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">mags</span><span class="p">,</span> <span class="n">gamma</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="n">thresh_max</span> <span class="o">=</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">mags</span><span class="p">)</span>
+        <span class="n">effective_threshold</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">thresh_percentile</span><span class="p">,</span> <span class="n">thresh_max</span><span class="p">)</span>
+
+        <span class="n">pruned_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="n">mags</span> <span class="o">&gt;</span> <span class="n">effective_threshold</span><span class="p">]</span>
+
+        <span class="c1"># d + 1 is the minimum number of points for a non-degenerate</span>
+        <span class="c1"># convex hull in d dimensions</span>
+        <span class="k">if</span> <span class="n">pruned_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">d</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">data</span>
+
+        <span class="k">return</span> <span class="n">pruned_data</span></div>
+
+
+<div class="viewcode-block" id="MIOptimizer.extract_boundary">
+<a class="viewcode-back" href="../../reference/generated/cnica.MIOptimizer.html#cnica.MIOptimizer.extract_boundary">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">extract_boundary</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">data</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Extracts the outer boundary points of the dataset.</span>
+
+<span class="sd">        Uses one of two methods depending on dimensionality and dataset size:</span>
+
+<span class="sd">        **Tier 1 — Exact Convex Hull** (:math:`d \leq` `CONVEX_HULL_MAX_DIM`,</span>
+<span class="sd">        :math:`N \leq` `CONVEX_HULL_MAX_SAMPLES`): computes the exact convex hull</span>
+<span class="sd">        via QHull and returns its vertices. Falls back to Tier 2 if QHull fails</span>
+<span class="sd">        (e.g. perfectly collinear data). These thresholds reflect empirically</span>
+<span class="sd">        observed performance limits of the QHull algorithm.</span>
+
+<span class="sd">        **Tier 2 — Support Function Approximation** (high-dimensional or large</span>
+<span class="sd">        :math:`N`): evaluates the support function of the dataset along :math:`2d`</span>
+<span class="sd">        axis-aligned basis directions and</span>
+<span class="sd">        :math:`d \times \texttt{NUM_PROBES_PER_D}` random unit directions,</span>
+<span class="sd">        returning the unique set of extreme points found.</span>
+
+<span class="sd">        Reference</span>
+<span class="sd">        ---------</span>
+<span class="sd">        Sartipizadeh, H., &amp; Suryanarayanan, S. (2016).</span>
+<span class="sd">        &quot;Computing the Approximate Convex Hull in High Dimensions.&quot;</span>
+<span class="sd">        IEEE Access.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        data : np.ndarray</span>
+<span class="sd">            :math:`(d, N)` data matrix of boundary candidates.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        np.ndarray</span>
+<span class="sd">            :math:`(d, N&#39;)` matrix of boundary points where :math:`N&#39; \leq N`.</span>
+<span class="sd">            Returns `data` unchanged if :math:`N &lt; 3`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">d</span><span class="p">,</span> <span class="n">N</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span>
+        <span class="k">if</span> <span class="n">N</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">data</span>
+
+        <span class="c1"># Tier 1: Exact Convex Hull for low-dimensional, manageable datasets</span>
+        <span class="k">if</span> <span class="n">d</span> <span class="o">&lt;=</span> <span class="n">CONVEX_HULL_MAX_DIM</span> <span class="ow">and</span> <span class="n">N</span> <span class="o">&lt;=</span> <span class="n">CONVEX_HULL_MAX_SAMPLES</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">hull_indices</span> <span class="o">=</span> <span class="n">ConvexHull</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">vertices</span>
+                <span class="k">return</span> <span class="n">data</span><span class="p">[:,</span> <span class="n">hull_indices</span><span class="p">]</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="k">pass</span>  <span class="c1"># Fall through to Tier 2 if QHull fails</span>
+
+        <span class="c1"># Tier 2: Support Function Approximation via Directional Probes</span>
+
+        <span class="c1"># Axis-aligned probes: guard against constraint violations along</span>
+        <span class="c1"># each coordinate axis and its negation</span>
+        <span class="n">basis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+        <span class="n">probes_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">basis</span><span class="p">,</span> <span class="o">-</span><span class="n">basis</span><span class="p">]</span>
+
+        <span class="c1"># Random probes: guard against violations along diagonal directions</span>
+        <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">RNG_SEED</span><span class="p">)</span>
+        <span class="n">random_probes</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">NUM_PROBES_PER_D</span> <span class="o">*</span> <span class="n">d</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span>
+        <span class="n">random_probes</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">random_probes</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">probes_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">random_probes</span><span class="p">)</span>
+
+        <span class="c1"># For each probe direction, find the point with maximum projection</span>
+        <span class="c1"># all_probes: (P, d) @ data: (d, N) -&gt; (P, N)</span>
+        <span class="n">all_probes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span><span class="n">probes_list</span><span class="p">)</span>
+        <span class="n">extreme_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">all_probes</span> <span class="o">@</span> <span class="n">data</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">data</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">extreme_indices</span><span class="p">)]</span></div>
+
+
+<div class="viewcode-block" id="MIOptimizer.fit_transform">
+<a class="viewcode-back" href="../../reference/generated/cnica.MIOptimizer.html#cnica.MIOptimizer.fit_transform">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fit_transform</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">C</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+            <span class="n">S</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MIOptimizerResult</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Orchestrates the barrier method to find the optimal transformation</span>
+<span class="sd">        :math:`M`.</span>
+
+<span class="sd">        Follows an interior point central path: starting from a large :math:`\mu`,</span>
+<span class="sd">        the inner loop minimizes :math:`f(M)` for fixed :math:`\mu`, then</span>
+<span class="sd">        :math:`\mu` is cooled by `BARRIER_COOLING_RATE` and the process repeats</span>
+<span class="sd">        until the duality gap</span>
+<span class="sd">        :math:`n_{\text{constraints}} \cdot \mu` falls below `tol`.</span>
+
+<span class="sd">        :math:`M` is optimized in :math:`SL(n)` by projecting gradients onto the</span>
+<span class="sd">        tangent space, keeping :math:`\det(M)` stable throughout.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        C : np.ndarray</span>
+<span class="sd">            :math:`(n, n_C)` left constraint matrix. All elements must be</span>
+<span class="sd">            non-negative.</span>
+<span class="sd">        S : np.ndarray</span>
+<span class="sd">            :math:`(n, n_S)` right constraint (source) matrix. All elements must</span>
+<span class="sd">            be non-negative.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        MIOptimizerResult</span>
+<span class="sd">            Contains the optimized matrix ``x``, convergence info</span>
+<span class="sd">            ``success`` and ``message``, final objective ``fun``, final</span>
+<span class="sd">            gradient ``jac``, iteration counts ``nit`` and ``nit_outer``,</span>
+<span class="sd">            and the transformed constraint matrices ``inv_MT_C`` and ``MS``</span>
+<span class="sd">            for verification.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span>
+        <span class="n">use_0</span><span class="p">,</span> <span class="n">use_1</span><span class="p">,</span> <span class="n">use_2</span> <span class="o">=</span> <span class="n">params</span>
+        <span class="k">assert</span> <span class="n">use_0</span> <span class="ow">or</span> <span class="n">use_1</span> <span class="ow">or</span> <span class="n">use_2</span><span class="p">,</span> \
+            <span class="s2">&quot;At least one of use_0, use_1, use_2 must be True&quot;</span>
+        <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">C</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">),</span> <span class="s2">&quot;All elements of C must be non-negative&quot;</span>
+        <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">S</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">),</span> <span class="s2">&quot;All elements of S must be non-negative&quot;</span>
+
+        <span class="n">n_samples_S</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="c1"># Normalize C and S to balance left and right barrier gradients</span>
+        <span class="c1"># Normalize and obtain scaling matrices</span>
+        <span class="n">C_copy</span><span class="p">,</span> <span class="n">S_copy</span><span class="p">,</span> <span class="n">Lambda_C</span><span class="p">,</span> <span class="n">Lambda_S</span> <span class="o">=</span> <span class="n">MIOptimizer</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Reduce C and S to boundary points: pruning removes near-origin</span>
+        <span class="c1"># noise, extract_boundary retains only convex hull vertices.</span>
+        <span class="c1"># Barrier constraints need only be enforced on the boundary since</span>
+        <span class="c1"># the optimal solution lies there.</span>
+        <span class="n">C_const</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_boundary</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prune</span><span class="p">(</span><span class="n">C_copy</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">gamma</span><span class="p">))</span>
+        <span class="n">S_const</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_boundary</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prune</span><span class="p">(</span><span class="n">S_copy</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">gamma</span><span class="p">))</span>
+        <span class="n">n_constraints</span> <span class="o">=</span> <span class="n">C_const</span><span class="o">.</span><span class="n">size</span> <span class="o">+</span> <span class="n">S_const</span><span class="o">.</span><span class="n">size</span>
+
+        <span class="c1"># Covariance matrices for the decorrelation objective</span>
+        <span class="n">Sigmas</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_covariances</span><span class="p">(</span><span class="n">S_copy</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+
+        <span class="c1"># Validate covariance matrices are positive semi-definite</span>
+        <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigvalsh</span><span class="p">(</span><span class="n">Sigma</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="n">NUMERICAL_EPSILON</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">Sigma</span> <span class="ow">in</span> <span class="n">Sigmas</span>
+        <span class="p">),</span> <span class="s2">&quot;All covariance matrices must be positive semi-definite&quot;</span>
+
+        <span class="c1"># Precompute sparsity norm statistics</span>
+        <span class="n">S_sums</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">S_copy</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">n_samples_S</span>
+        <span class="n">S_gram</span> <span class="o">=</span> <span class="n">S_copy</span> <span class="o">@</span> <span class="n">S_copy</span><span class="o">.</span><span class="n">T</span> <span class="o">/</span> <span class="n">n_samples_S</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sparsity regularization strength lambda: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">lam</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Initial M is the identity</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">C</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        <span class="n">inv_M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+        <span class="c1"># Set initial mu so the barrier gradients are a fixed fraction</span>
+        <span class="c1"># BARRIER_COOLING_RATE of the main objective gradient at M=I</span>
+        <span class="n">res_main</span> <span class="o">=</span> <span class="n">MIOptimizer</span><span class="o">.</span><span class="n">main</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">Sigmas</span><span class="p">)</span>
+        <span class="n">res_right</span> <span class="o">=</span> <span class="n">MIOptimizer</span><span class="o">.</span><span class="n">right_barrier</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">S_const</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+        <span class="n">res_left</span> <span class="o">=</span> <span class="n">MIOptimizer</span><span class="o">.</span><span class="n">left_barrier</span><span class="p">(</span><span class="n">inv_M</span><span class="p">,</span> <span class="n">C_const</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;f_main=</span><span class="si">{</span><span class="n">res_main</span><span class="o">.</span><span class="n">f</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, f_right_barrier=</span><span class="si">{</span><span class="n">res_right</span><span class="o">.</span><span class="n">f</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, &quot;</span>
+              <span class="sa">f</span><span class="s2">&quot;f_left_barrier=</span><span class="si">{</span><span class="n">res_left</span><span class="o">.</span><span class="n">f</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="p">(</span><span class="n">res_main</span><span class="o">.</span><span class="n">grad</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">res_right</span><span class="o">.</span><span class="n">grad</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+                <span class="ow">and</span> <span class="n">res_left</span><span class="o">.</span><span class="n">grad</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">),</span> \
+            <span class="s2">&quot;Gradients must be computed for initial mu calculation&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;||grad_main||=</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">res_main</span><span class="o">.</span><span class="n">grad</span><span class="p">)</span><span class="si">:</span><span class="s2">.4e</span><span class="si">}</span><span class="s2">, &quot;</span>
+              <span class="sa">f</span><span class="s2">&quot;||grad_right||=</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">res_right</span><span class="o">.</span><span class="n">grad</span><span class="p">)</span><span class="si">:</span><span class="s2">.4e</span><span class="si">}</span><span class="s2">, &quot;</span>
+              <span class="sa">f</span><span class="s2">&quot;||grad_left||=</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">res_left</span><span class="o">.</span><span class="n">grad</span><span class="p">)</span><span class="si">:</span><span class="s2">.4e</span><span class="si">}</span><span class="s2">, &quot;</span>
+              <span class="sa">f</span><span class="s2">&quot;||grad_right + grad_left||=</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">res_right</span><span class="o">.</span><span class="n">grad</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">res_left</span><span class="o">.</span><span class="n">grad</span><span class="p">)</span><span class="si">:</span><span class="s2">.4e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">mu</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span>
+            <span class="n">BARRIER_COOLING_RATE</span>
+            <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">res_main</span><span class="o">.</span><span class="n">grad</span><span class="p">)</span>
+            <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">res_right</span><span class="o">.</span><span class="n">grad</span> <span class="o">+</span> <span class="n">res_left</span><span class="o">.</span><span class="n">grad</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;mu=</span><span class="si">{</span><span class="n">mu</span><span class="si">:</span><span class="s2">.4e</span><span class="si">}</span><span class="s2"> calculated to balance barrier and main gradients&quot;</span><span class="p">)</span>
+
+        <span class="n">res</span> <span class="o">=</span> <span class="n">MIOptimizer</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">inv_M</span><span class="p">,</span> <span class="n">Sigmas</span><span class="p">,</span> <span class="n">C_const</span><span class="p">,</span> <span class="n">S_const</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span>
+                            <span class="n">S_sums</span><span class="p">,</span> <span class="n">S_gram</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lam</span><span class="p">,</span> <span class="n">n_samples_S</span><span class="p">,</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">sparsity_gate_threshold</span><span class="p">)</span>
+
+        <span class="n">total_inner_iters</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">outer_iter</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">converged</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">for</span> <span class="n">outer_iter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_outer_loop_iters</span><span class="p">):</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Outer iteration </span><span class="si">{</span><span class="n">outer_iter</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">/&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">max_outer_loop_iters</span><span class="si">}</span><span class="s2">, &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;mu=</span><span class="si">{</span><span class="n">mu</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">, f=</span><span class="si">{</span><span class="n">res</span><span class="o">.</span><span class="n">f</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">__</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_inner_loop_iters</span><span class="p">):</span>
+                <span class="n">success</span><span class="p">,</span> <span class="n">M_new</span><span class="p">,</span> <span class="n">inv_M_new</span> <span class="o">=</span> <span class="n">MIOptimizer</span><span class="o">.</span><span class="n">optimize_step</span><span class="p">(</span>
+                    <span class="n">M</span><span class="p">,</span> <span class="n">inv_M</span><span class="p">,</span> <span class="n">Sigmas</span><span class="p">,</span> <span class="n">C_const</span><span class="p">,</span> <span class="n">S_const</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span>
+                    <span class="n">S_sums</span><span class="p">,</span> <span class="n">S_gram</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lam</span><span class="p">,</span> <span class="n">n_samples_S</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">sparsity_gate_threshold</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">initial_lr</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_line_search_iters</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">success</span><span class="p">:</span>
+                    <span class="k">break</span>
+
+                <span class="n">M</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">M_new</span>
+                <span class="n">inv_M</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">inv_M_new</span>
+                <span class="n">total_inner_iters</span> <span class="o">+=</span> <span class="mi">1</span>
+
+                <span class="n">res</span> <span class="o">=</span> <span class="n">MIOptimizer</span><span class="o">.</span><span class="n">f</span><span class="p">(</span>
+                    <span class="n">M</span><span class="p">,</span> <span class="n">inv_M</span><span class="p">,</span> <span class="n">Sigmas</span><span class="p">,</span> <span class="n">C_const</span><span class="p">,</span> <span class="n">S_const</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span>
+                    <span class="n">S_sums</span><span class="p">,</span> <span class="n">S_gram</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lam</span><span class="p">,</span> <span class="n">n_samples_S</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">sparsity_gate_threshold</span><span class="p">)</span>
+                <span class="k">assert</span> <span class="n">res</span><span class="o">.</span><span class="n">grad</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> \
+                    <span class="s2">&quot;Gradient must be computed for convergence check&quot;</span>
+
+                <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">grad</span><span class="p">)</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">tol</span><span class="p">:</span>
+                    <span class="k">break</span>
+
+            <span class="c1"># Duality gap proxy: n_constraints * mu bounds the suboptimality</span>
+            <span class="c1"># of the current central path solution</span>
+            <span class="k">if</span> <span class="n">n_constraints</span> <span class="o">*</span> <span class="n">mu</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">tol</span><span class="p">:</span>
+                <span class="n">converged</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">break</span>
+
+            <span class="n">mu</span> <span class="o">*=</span> <span class="n">BARRIER_COOLING_RATE</span>
+
+        <span class="k">assert</span> <span class="n">res</span><span class="o">.</span><span class="n">grad</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> \
+            <span class="s2">&quot;Gradient must be computed for final result&quot;</span>
+
+        <span class="n">message</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s2">&quot;Converged: duality gap below tolerance.&quot;</span>
+            <span class="k">if</span> <span class="n">converged</span>
+            <span class="k">else</span> <span class="s2">&quot;Did not converge: maximum iterations reached.&quot;</span>
+        <span class="p">)</span>
+        
+        <span class="c1"># Recover results in original space using Lambda inverses.</span>
+        <span class="n">inv_Lambda_C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">Lambda_C</span><span class="p">))</span>
+        <span class="n">inv_Lambda_S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">Lambda_S</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">MIOptimizerResult</span><span class="p">(</span>
+            <span class="n">x</span><span class="o">=</span><span class="n">M</span><span class="p">,</span>
+            <span class="n">success</span><span class="o">=</span><span class="n">converged</span><span class="p">,</span>
+            <span class="n">message</span><span class="o">=</span><span class="n">message</span><span class="p">,</span>
+            <span class="n">fun</span><span class="o">=</span><span class="n">res</span><span class="o">.</span><span class="n">f</span><span class="p">,</span>
+            <span class="n">jac</span><span class="o">=</span><span class="n">res</span><span class="o">.</span><span class="n">grad</span><span class="p">,</span>
+            <span class="n">nit</span><span class="o">=</span><span class="n">total_inner_iters</span><span class="p">,</span>
+            <span class="n">nit_outer</span><span class="o">=</span><span class="n">outer_iter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="n">inv_MT_C</span><span class="o">=</span><span class="n">inv_M</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">C</span><span class="p">,</span>
+            <span class="n">MS</span><span class="o">=</span><span class="n">M</span> <span class="o">@</span> <span class="n">S</span><span class="p">,</span>
+            <span class="n">C_const</span><span class="o">=</span><span class="n">inv_Lambda_C</span> <span class="o">@</span> <span class="n">C_const</span><span class="p">,</span>
+            <span class="n">S_const</span><span class="o">=</span><span class="n">inv_Lambda_S</span> <span class="o">@</span> <span class="n">S_const</span>
+        <span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Robert J. S. Ivancic
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025, Robert J. S. Ivancic.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+  Last updated on 2026-04-13.
+  <br/>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

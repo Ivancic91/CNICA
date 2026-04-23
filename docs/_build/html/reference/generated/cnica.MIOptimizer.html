@@ -1,0 +1,1100 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>cnica.MIOptimizer &#8212; CNICA 0.0.2.dev1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="https://pages.nist.gov/nist-header-footer/css/nist-combined.css" />
+    <link rel="stylesheet" type="text/css" href="https://pages.nist.gov/leaveNotice/css/jquery.leaveNotice.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=10e0586b"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "displayMath": [["$$", "$$"], ["\\[", "\\]"]]}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/generated/cnica.MIOptimizer';</script>
+    <script src="https://code.jquery.com/jquery-3.6.2.min.js"></script>
+    <script src="https://pages.nist.gov/nist-header-footer/js/nist-header-footer.js"></script>
+    <script src="https://pages.nist.gov/leaveNotice/js/jquery.leaveNotice-nist.min.js"></script>
+    <script src="../../_static/js/leave_notice.js?v=133c5535"></script>
+    <script async="async" id="_fed_au_ua_tag" type="text/javascript" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=NIST&subagency=github&pua=UA-66610693-1&yt=true&exts=ppsx,pps,f90,sch,rtf,wrl,txz,m1v,xlsm,msi,xsd,f,tif,eps,mpg,xml,pl,xlt,c"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="cnica.FuncResult" href="cnica.FuncResult.html" />
+    <link rel="prev" title="cnica.CNICA" href="cnica.CNICA.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="2026-04-13"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">CNICA 0.0.2.dev1 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../index.html">
+                    CNICA
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../examples/index.html">User guide</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/example-usage.html">Example Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/usage/demo.html">A demonstration of CNICA</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">API Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="cnica.CNICA.html">cnica.CNICA</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">cnica.MIOptimizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cnica.FuncResult.html">cnica.FuncResult</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cnica.MIOptimizerResult.html">cnica.MIOptimizerResult</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cnica.NMFParams.html">cnica.NMFParams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cnica.MIOParams.html">cnica.MIOParams</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../authors.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../navigation.html">Indices and tables</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../genindex.html">Index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../py-modindex.html">Module Index</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Ivancic91/CNICA" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Ivancic91/CNICA/issues/new?title=Issue%20on%20page%20%2Freference/generated/cnica.MIOptimizer.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/reference/generated/cnica.MIOptimizer.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>cnica.MIOptimizer</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cnica.MIOptimizer"><code class="docutils literal notranslate"><span class="pre">MIOptimizer</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cnica.MIOptimizer.fit_transform"><code class="docutils literal notranslate"><span class="pre">MIOptimizer.fit_transform()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cnica.MIOptimizer.optimize_step"><code class="docutils literal notranslate"><span class="pre">MIOptimizer.optimize_step()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cnica.MIOptimizer.f"><code class="docutils literal notranslate"><span class="pre">MIOptimizer.f()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cnica.MIOptimizer.normalize"><code class="docutils literal notranslate"><span class="pre">MIOptimizer.normalize()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cnica.MIOptimizer.get_covariances"><code class="docutils literal notranslate"><span class="pre">MIOptimizer.get_covariances()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cnica.MIOptimizer.prune"><code class="docutils literal notranslate"><span class="pre">MIOptimizer.prune()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cnica.MIOptimizer.extract_boundary"><code class="docutils literal notranslate"><span class="pre">MIOptimizer.extract_boundary()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cnica.MIOptimizer.main"><code class="docutils literal notranslate"><span class="pre">MIOptimizer.main()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cnica.MIOptimizer.right_barrier"><code class="docutils literal notranslate"><span class="pre">MIOptimizer.right_barrier()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cnica.MIOptimizer.left_barrier"><code class="docutils literal notranslate"><span class="pre">MIOptimizer.left_barrier()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cnica.MIOptimizer.sparse_norm"><code class="docutils literal notranslate"><span class="pre">MIOptimizer.sparse_norm()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id0"><code class="docutils literal notranslate"><span class="pre">MIOptimizer.f()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><code class="docutils literal notranslate"><span class="pre">MIOptimizer.optimize_step()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"><code class="docutils literal notranslate"><span class="pre">MIOptimizer.normalize()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"><code class="docutils literal notranslate"><span class="pre">MIOptimizer.get_covariances()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4"><code class="docutils literal notranslate"><span class="pre">MIOptimizer.prune()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5"><code class="docutils literal notranslate"><span class="pre">MIOptimizer.extract_boundary()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6"><code class="docutils literal notranslate"><span class="pre">MIOptimizer.fit_transform()</span></code></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="cnica-mioptimizer">
+<h1>cnica.MIOptimizer<a class="headerlink" href="#cnica-mioptimizer" title="Link to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="cnica.MIOptimizer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cnica.</span></span><span class="sig-name descname"><span class="pre">MIOptimizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(True,</span> <span class="pre">True,</span> <span class="pre">False)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_outer_loop_iters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_inner_loop_iters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_line_search_iters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-14</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.02</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_lr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_half_order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_max_lag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lam</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sparsity_gate_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cnica/optimizer.html#MIOptimizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference external" href="https://github.com/Ivancic91/CNICA/blob/main/src/cnica/optimizer.py#L43-L1118"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cnica.MIOptimizer" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Riemannian Manifold Optimizer using Interior Point (Log-Barrier) methods.</p>
+<p>This class minimizes a composite objective function on the manifold of
+invertible matrices. It is designed to find an optimal linear transformation
+<span class="math notranslate nohighlight">\(M\)</span> that decorrelates signal components while strictly satisfying
+non-negativity constraints via log-barrier penalties.</p>
+<p>The objective function is defined as:</p>
+<div class="math notranslate nohighlight">
+\[f(M) = f_{\text{main}}(M) + \mu (h_R(M) + h_L(M))\]</div>
+<p>where <span class="math notranslate nohighlight">\(f_{\text{main}}\)</span> is the log-determinant of transformed
+covariances, and <span class="math notranslate nohighlight">\(h_R, h_L\)</span> are the barrier functions for the
+constraints <span class="math notranslate nohighlight">\(MS &gt; 0\)</span> and <span class="math notranslate nohighlight">\(M^{-T}C &gt; 0\)</span> respectively.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>params</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>) – Three flags <code class="docutils literal notranslate"><span class="pre">(use_0th,</span> <span class="pre">use_1st,</span> <span class="pre">use_2nd)</span></code> selecting which derivative
+orders to include in the decorrelation objective. At least one
+must be True.</p></li>
+<li><p><strong>max_outer_loop_iters</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <em>default</em> <code class="docutils literal notranslate"><span class="pre">10</span></code>) – Number of iterations for the barrier cooling schedule. In each outer
+iteration, the barrier parameter <span class="math notranslate nohighlight">\(\mu\)</span> is reduced.</p></li>
+<li><p><strong>max_inner_loop_iters</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <em>default</em> <code class="docutils literal notranslate"><span class="pre">1000</span></code>) – Maximum number of descent steps to take for a fixed value of <span class="math notranslate nohighlight">\(\mu\)</span>.</p></li>
+<li><p><strong>max_line_search_iters</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <em>default</em> <code class="docutils literal notranslate"><span class="pre">50</span></code>) – Maximum number of backtracking steps to perform during the line search
+to satisfy the Armijo condition.</p></li>
+<li><p><strong>tol</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <em>default</em> <code class="docutils literal notranslate"><span class="pre">1e-12</span></code>) – Convergence tolerance for the norm of the projected gradient.</p></li>
+<li><p><strong>gamma</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <em>default</em> <code class="docutils literal notranslate"><span class="pre">0.02</span></code>) – The fraction of lowest-magnitude points to prune from the dataset to
+avoid numerical issues near the origin when enforcing the barrier
+constraints. The removed points are those with the minimum of either
+the percentile threshold or the max magnitude threshold.</p></li>
+<li><p><strong>initial_lr</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <em>default</em> <code class="docutils literal notranslate"><span class="pre">0.1</span></code>) – The initial step size (learning rate) for the backtracking line search.</p></li>
+<li><p><strong>filter_half_order</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <em>default</em> <code class="docutils literal notranslate"><span class="pre">10</span></code>) – Half-order <span class="math notranslate nohighlight">\(m\)</span> of the Parks-McClellan FIR filters used to compute
+1st and 2nd order temporal derivatives of the input signals.</p></li>
+<li><p><strong>filter_max_lag</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <em>default</em> <code class="docutils literal notranslate"><span class="pre">10</span></code>) – Maximum autocorrelation lag for unsupervised MSRAC-based filter tuning.</p></li>
+<li><p><strong>lam</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <em>default</em> <code class="docutils literal notranslate"><span class="pre">10.0</span></code>) – Regularization strength for the sparsity norm. Set to 0 to disable.</p></li>
+<li><p><strong>sparsity_gate_threshold</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <em>default</em> <code class="docutils literal notranslate"><span class="pre">0.5</span></code>) – Midpoint of the sigmoid gate in the sparsity norm. Rows with a
+Hoyer density below this value are penalized; rows above it
+(e.g. dense sine-like signals) are protected.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="cnica.MIOptimizer.fit_transform">
+<span class="sig-name descname"><span class="pre">fit_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cnica/optimizer.html#MIOptimizer.fit_transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference external" href="https://github.com/Ivancic91/CNICA/blob/main/src/cnica/optimizer.py#L947-L1118"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cnica.MIOptimizer.fit_transform" title="Link to this definition">#</a></dt>
+<dd><p>Executes the full optimization process to find the optimal matrix <span class="math notranslate nohighlight">\(M\)</span>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cnica.MIOptimizer.optimize_step">
+<span class="sig-name descname"><span class="pre">optimize_step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">M</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inv_M</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Sigmas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_lr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_line_search_iters</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cnica/optimizer.html#MIOptimizer.optimize_step"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference external" href="https://github.com/Ivancic91/CNICA/blob/main/src/cnica/optimizer.py#L554-L680"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cnica.MIOptimizer.optimize_step" title="Link to this definition">#</a></dt>
+<dd><p>Performs a single Riemannian descent step with linearized backtracking.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cnica.MIOptimizer.f">
+<span class="sig-name descname"><span class="pre">f</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">M</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inv_M</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Sigmas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compute_grad</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cnica/optimizer.html#MIOptimizer.f"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference external" href="https://github.com/Ivancic91/CNICA/blob/main/src/cnica/optimizer.py#L461-L552"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cnica.MIOptimizer.f" title="Link to this definition">#</a></dt>
+<dd><p>Calculates the total objective function and its projected tangent gradient.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cnica.MIOptimizer.normalize">
+<span class="sig-name descname"><span class="pre">normalize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cnica/optimizer.html#MIOptimizer.normalize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference external" href="https://github.com/Ivancic91/CNICA/blob/main/src/cnica/optimizer.py#L682-L753"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cnica.MIOptimizer.normalize" title="Link to this definition">#</a></dt>
+<dd><p>Rescales constraint matrices to balance barrier gradients.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cnica.MIOptimizer.get_covariances">
+<span class="sig-name descname"><span class="pre">get_covariances</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">S</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cnica/optimizer.html#MIOptimizer.get_covariances"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference external" href="https://github.com/Ivancic91/CNICA/blob/main/src/cnica/optimizer.py#L755-L824"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cnica.MIOptimizer.get_covariances" title="Link to this definition">#</a></dt>
+<dd><p>Computes the covariance matrices of the data and its derivatives.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cnica.MIOptimizer.prune">
+<span class="sig-name descname"><span class="pre">prune</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cnica/optimizer.html#MIOptimizer.prune"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference external" href="https://github.com/Ivancic91/CNICA/blob/main/src/cnica/optimizer.py#L826-L875"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cnica.MIOptimizer.prune" title="Link to this definition">#</a></dt>
+<dd><p>Remove low-magnitude points near the origin from a data matrix.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cnica.MIOptimizer.extract_boundary">
+<span class="sig-name descname"><span class="pre">extract_boundary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cnica/optimizer.html#MIOptimizer.extract_boundary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference external" href="https://github.com/Ivancic91/CNICA/blob/main/src/cnica/optimizer.py#L877-L945"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cnica.MIOptimizer.extract_boundary" title="Link to this definition">#</a></dt>
+<dd><p>Convex hull or support-function approximation of boundary points.</p>
+</dd></dl>
+
+<p class="rubric">Notes</p>
+<p>Three key numerical techniques keep the optimizer efficient and stable:</p>
+<p>1. <strong>Boundary Reduction</strong>: Barrier constraints are enforced only on the
+convex hull vertices of C and S (or a support-function approximation
+for d &gt; 5), reducing barrier terms from O(samples) to O(vertices).</p>
+<p>2. <strong>Tangent Space Projection</strong>: The Euclidean gradient is projected onto
+the tangent space of SL(n) via</p>
+<div class="math notranslate nohighlight">
+\[Z = \nabla f - \frac{\operatorname{Tr}(M^{-1} \nabla f)}{n} \cdot M\]</div>
+<p>keeping <span class="math notranslate nohighlight">\(\det(M)\)</span> stable throughout.</p>
+<p>3. <strong>Two-Phase Line Search</strong>: Backtracking first uses a cheap first-order
+inverse approximation</p>
+<div class="math notranslate nohighlight">
+\[(M - \alpha Z)^{-1} \approx M^{-1} + \alpha M^{-1} Z M^{-1}\]</div>
+<p>to find a candidate step size, then confirms with the exact matrix
+exponential retraction.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">opt</span> <span class="o">=</span> <span class="n">MIOptimizer</span><span class="p">(</span><span class="n">params</span><span class="o">=</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">C_data</span><span class="p">,</span> <span class="n">S_data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">optimal_M</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">x</span>
+</pre></div>
+</div>
+<p class="rubric">Methods</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#id5" title="cnica.MIOptimizer.extract_boundary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">extract_boundary</span></code></a>(data)</p></td>
+<td><p>Extracts the outer boundary points of the dataset.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#id0" title="cnica.MIOptimizer.f"><code class="xref py py-obj docutils literal notranslate"><span class="pre">f</span></code></a>(M, inv_M, Sigmas, C, S, mu, S_sums, ...[, ...])</p></td>
+<td><p>Total objective and its projection onto the tangent space of <span class="math notranslate nohighlight">\(SL(n)\)</span>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#id6" title="cnica.MIOptimizer.fit_transform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_transform</span></code></a>(C, S)</p></td>
+<td><p>Orchestrates the barrier method to find the optimal transformation <span class="math notranslate nohighlight">\(M\)</span>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#id3" title="cnica.MIOptimizer.get_covariances"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_covariances</span></code></a>(S, params)</p></td>
+<td><p>Covariance matrices of <span class="math notranslate nohighlight">\(S\)</span> and its filtered temporal derivatives.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cnica.MIOptimizer.left_barrier" title="cnica.MIOptimizer.left_barrier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">left_barrier</span></code></a>(inv_M, C, mu[, compute_grad])</p></td>
+<td><p>Log-barrier enforcing the non-negativity constraint <span class="math notranslate nohighlight">\(M^{-T}C &gt; 0\)</span>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#cnica.MIOptimizer.main" title="cnica.MIOptimizer.main"><code class="xref py py-obj docutils literal notranslate"><span class="pre">main</span></code></a>(M, Sigmas[, compute_grad])</p></td>
+<td><p>Decorrelation objective: sum of log diagonal variances of transformed covariances.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#id2" title="cnica.MIOptimizer.normalize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">normalize</span></code></a>(C, S)</p></td>
+<td><p>Rescales <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(S\)</span> so that their row variances are balanced across the left and right barrier terms, and both matrices have unit standard deviation.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#id1" title="cnica.MIOptimizer.optimize_step"><code class="xref py py-obj docutils literal notranslate"><span class="pre">optimize_step</span></code></a>(M, inv_M, Sigmas, C, S, mu, ...)</p></td>
+<td><p>Single Riemannian descent step via two-phase backtracking line search.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#id4" title="cnica.MIOptimizer.prune"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prune</span></code></a>(data[, gamma])</p></td>
+<td><p>Removes low-magnitude points clustered near the origin.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#cnica.MIOptimizer.right_barrier" title="cnica.MIOptimizer.right_barrier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">right_barrier</span></code></a>(M, S, mu[, compute_grad])</p></td>
+<td><p>Log-barrier enforcing the non-negativity constraint <span class="math notranslate nohighlight">\(MS &gt; 0\)</span>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cnica.MIOptimizer.sparse_norm" title="cnica.MIOptimizer.sparse_norm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sparse_norm</span></code></a>(M, S_sums, S_gram, lam, n_samples)</p></td>
+<td><p>'Safe-Plateau' sparsity regularizer based on a gated Hoyer density.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="rubric">Dunder Methods</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+</tbody>
+</table>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="cnica.MIOptimizer.main">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">M</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Sigmas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compute_grad</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cnica/optimizer.html#MIOptimizer.main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference external" href="https://github.com/Ivancic91/CNICA/blob/main/src/cnica/optimizer.py#L173-L230"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cnica.MIOptimizer.main" title="Link to this definition">#</a></dt>
+<dd><p>Decorrelation objective: sum of log diagonal variances of transformed
+covariances.</p>
+<p>For each covariance <span class="math notranslate nohighlight">\(\Sigma\)</span> in <cite>Sigmas</cite> (one per active derivative
+order), computes:</p>
+<div class="math notranslate nohighlight">
+\[f_{\text{main}}(M) = \frac{1}{2} \sum_{\Sigma} \sum_{i}
+\log\left([M \Sigma M^T]_{ii} + \epsilon\right)\]</div>
+<p>Minimizing this drives <span class="math notranslate nohighlight">\(M\)</span> toward a transformation where each output
+channel has low variance across all derivative orders. This is the
+diagonal approximation to the differential entropy of a Gaussian,
+where the <span class="math notranslate nohighlight">\(1/2\)</span> arises from the information-theoretic derivation.
+The resulting gradient is <span class="math notranslate nohighlight">\(D \cdot M\Sigma\)</span>, where
+<span class="math notranslate nohighlight">\(D = \text{diag}(1 / [M \Sigma M^T]_{ii})\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>M</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – The <span class="math notranslate nohighlight">\((n, n)\)</span> linear transformation matrix.</p></li>
+<li><p><strong>Sigmas</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Covariance matrices of the 0th, 1st, or 2nd order derivatives
+of the source signals, as selected by <cite>params</cite> in <cite>fit_transform</cite>.
+Each must be <span class="math notranslate nohighlight">\((n, n)\)</span> and positive semi-definite.</p></li>
+<li><p><strong>compute_grad</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>, <em>default</em> <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a>) – Whether to compute and return the Euclidean gradient.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="cnica.FuncResult.html#cnica.FuncResult" title="cnica.optimizer.FuncResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">FuncResult</span></code></a> – Scalar objective <cite>f</cite> and <span class="math notranslate nohighlight">\((n, n)\)</span> gradient <cite>grad</cite>
+(<span class="math notranslate nohighlight">\(D \cdot M\Sigma\)</span>, summed over all <span class="math notranslate nohighlight">\(\Sigma\)</span>).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cnica.MIOptimizer.right_barrier">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">right_barrier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">M</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compute_grad</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cnica/optimizer.html#MIOptimizer.right_barrier"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference external" href="https://github.com/Ivancic91/CNICA/blob/main/src/cnica/optimizer.py#L232-L289"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cnica.MIOptimizer.right_barrier" title="Link to this definition">#</a></dt>
+<dd><p>Log-barrier enforcing the non-negativity constraint <span class="math notranslate nohighlight">\(MS &gt; 0\)</span>.</p>
+<p>Computes:</p>
+<div class="math notranslate nohighlight">
+\[h_R(M) = -\mu \sum_{i,j} \log\left([MS]_{ij} + \delta\right)\]</div>
+<p>The barrier approaches <span class="math notranslate nohighlight">\(+\infty\)</span> as any element of <span class="math notranslate nohighlight">\(MS\)</span>
+approaches <span class="math notranslate nohighlight">\(-\delta\)</span>, repelling the optimizer from the constraint
+boundary and ensuring the transformed source estimates remain non-negative.
+Returns <span class="math notranslate nohighlight">\(f = \infty\)</span> if the current <span class="math notranslate nohighlight">\(M\)</span> is already infeasible.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>M</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – The <span class="math notranslate nohighlight">\((n, n)\)</span> transformation matrix.</p></li>
+<li><p><strong>S</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – The <span class="math notranslate nohighlight">\((n, n_S)\)</span> constraint matrix (convex hull vertices of the
+source estimates).</p></li>
+<li><p><strong>mu</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Barrier strength. Reduced each outer iteration via
+<cite>BARRIER_COOLING_RATE</cite>.</p></li>
+<li><p><strong>compute_grad</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>, <em>default</em> <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a>) – Whether to compute the Euclidean gradient
+<span class="math notranslate nohighlight">\(-\mu \cdot W S^T\)</span> where <span class="math notranslate nohighlight">\(W_{ij} = 1/([MS]_{ij} + \delta)\)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="cnica.FuncResult.html#cnica.FuncResult" title="cnica.optimizer.FuncResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">FuncResult</span></code></a> – Scalar objective <cite>f</cite> and <span class="math notranslate nohighlight">\((n, n)\)</span> gradient <cite>grad</cite>.
+Returns <cite>f=np.inf</cite> if any element of <span class="math notranslate nohighlight">\(MS\)</span> violates the
+constraint boundary <span class="math notranslate nohighlight">\(-\delta\)</span>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cnica.MIOptimizer.left_barrier">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">left_barrier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inv_M</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compute_grad</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cnica/optimizer.html#MIOptimizer.left_barrier"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference external" href="https://github.com/Ivancic91/CNICA/blob/main/src/cnica/optimizer.py#L291-L358"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cnica.MIOptimizer.left_barrier" title="Link to this definition">#</a></dt>
+<dd><p>Log-barrier enforcing the non-negativity constraint <span class="math notranslate nohighlight">\(M^{-T}C &gt; 0\)</span>.</p>
+<p>Computes:</p>
+<div class="math notranslate nohighlight">
+\[h_L(M) = -\mu \sum_{i,j} \log\left([M^{-T}C]_{ij} + \delta\right)\]</div>
+<p>This is the dual constraint to <span class="math notranslate nohighlight">\(MS &gt; 0\)</span>: it ensures that the columns
+of <span class="math notranslate nohighlight">\(C\)</span>, when mapped by the inverse transformation <span class="math notranslate nohighlight">\(M^{-T}\)</span>,
+remain non-negative. Returns <span class="math notranslate nohighlight">\(f = \infty\)</span> if the current <span class="math notranslate nohighlight">\(M\)</span>
+is already infeasible.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul>
+<li><p><strong>inv_M</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – The <span class="math notranslate nohighlight">\((n, n)\)</span> inverse of the transformation matrix <span class="math notranslate nohighlight">\(M\)</span>.</p></li>
+<li><p><strong>C</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – The <span class="math notranslate nohighlight">\((n, n_C)\)</span> constraint matrix (convex hull vertices of the
+mixing matrix columns).</p></li>
+<li><p><strong>mu</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Barrier strength. Reduced each outer iteration via
+<cite>BARRIER_COOLING_RATE</cite>.</p></li>
+<li><p><strong>compute_grad</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>, <em>default</em> <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a>) – Whether to compute the Euclidean gradient with respect to <span class="math notranslate nohighlight">\(M\)</span>,
+derived via
+<span class="math notranslate nohighlight">\(\partial M^{-1}/\partial M \cdot dM = -M^{-1} dM\, M^{-1}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial h_L}{\partial M} = \mu \left(M^{-T}C\right) V^T M^{-T}\]</div>
+<p>where <span class="math notranslate nohighlight">\(V_{ij} = 1 / ([M^{-T}C]_{ij} + \delta)\)</span>.</p>
+</li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="cnica.FuncResult.html#cnica.FuncResult" title="cnica.optimizer.FuncResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">FuncResult</span></code></a> – Scalar objective <cite>f</cite> and <span class="math notranslate nohighlight">\((n, n)\)</span> gradient <cite>grad</cite>.
+Returns <cite>f=np.inf</cite> if any element of <span class="math notranslate nohighlight">\(M^{-T}C\)</span> violates the
+constraint boundary <span class="math notranslate nohighlight">\(-\delta\)</span>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cnica.MIOptimizer.sparse_norm">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sparse_norm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">M</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_sums</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_gram</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lam</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sparsity_gate_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compute_grad</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cnica/optimizer.html#MIOptimizer.sparse_norm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference external" href="https://github.com/Ivancic91/CNICA/blob/main/src/cnica/optimizer.py#L360-L459"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cnica.MIOptimizer.sparse_norm" title="Link to this definition">#</a></dt>
+<dd><p>‘Safe-Plateau’ sparsity regularizer based on a gated Hoyer density.</p>
+<p>For each row <span class="math notranslate nohighlight">\(c\)</span> of <span class="math notranslate nohighlight">\(MS\)</span>, computes the Hoyer normalized density:</p>
+<div class="math notranslate nohighlight">
+\[d_c = \frac{\|MS_c\|_1 / \|MS_c\|_2 - 1}{\sqrt{N} - 1} \in [0, 1]\]</div>
+<p>where <span class="math notranslate nohighlight">\(d_c = 0\)</span> is maximally sparse (one nonzero) and <span class="math notranslate nohighlight">\(d_c = 1\)</span>
+is maximally dense (uniform). A negative softplus gate then rewards sparse
+rows while protecting dense ones:</p>
+<div class="math notranslate nohighlight">
+\[f_s(M) = -\frac{\lambda}{k} \sum_c
+\log\left(1 + e^{k(\beta - d_c)}\right)\]</div>
+<p>When <span class="math notranslate nohighlight">\(d_c \ll \beta\)</span> the gate is open and the objective is a large
+negative number, rewarding the optimizer for preserving sparse (peaky) rows.
+When <span class="math notranslate nohighlight">\(d_c \gg \beta\)</span> the gate saturates and the term vanishes,
+leaving dense rows (e.g. sine waves) governed solely by the decorrelation
+objective.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>M</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – The <span class="math notranslate nohighlight">\((n, n)\)</span> transformation matrix.</p></li>
+<li><p><strong>S_sums</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Row sums of the source matrix: <span class="math notranslate nohighlight">\(S \mathbf{1} / N\)</span>, length <span class="math notranslate nohighlight">\(n\)</span>.
+Used to efficiently compute <span class="math notranslate nohighlight">\(\|MS\|_1\)</span> without forming <span class="math notranslate nohighlight">\(MS\)</span>.</p></li>
+<li><p><strong>S_gram</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Normalised Gram matrix <span class="math notranslate nohighlight">\(SS^T / N\)</span>, shape <span class="math notranslate nohighlight">\((n, n)\)</span>.
+Used to efficiently compute <span class="math notranslate nohighlight">\(\|MS\|_2\)</span> without forming <span class="math notranslate nohighlight">\(MS\)</span>.</p></li>
+<li><p><strong>lam</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Regularization strength. Set to 0 to disable entirely.</p></li>
+<li><p><strong>n_samples</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Number of columns in <span class="math notranslate nohighlight">\(S\)</span>, used to normalize the Hoyer density.</p></li>
+<li><p><strong>sparsity_gate_threshold</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <em>default</em> <code class="docutils literal notranslate"><span class="pre">0.5</span></code>) – Midpoint <span class="math notranslate nohighlight">\(\beta\)</span> of the sigmoid gate. Rows with density below
+this value are penalized; rows above it are protected.</p></li>
+<li><p><strong>compute_grad</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>, <em>default</em> <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a>) – Whether to compute the gradient with respect to <span class="math notranslate nohighlight">\(M\)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="cnica.FuncResult.html#cnica.FuncResult" title="cnica.optimizer.FuncResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">FuncResult</span></code></a> – Scalar objective <cite>f</cite> and <span class="math notranslate nohighlight">\((n, n)\)</span> gradient <cite>grad</cite>.
+Returns <cite>f=0, grad=0</cite> if <cite>lam &lt;= 0</cite>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id0">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">f</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">M</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inv_M</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Sigmas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_sums</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_gram</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lam</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sparsity_gate_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compute_grad</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cnica/optimizer.html#MIOptimizer.f"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference external" href="https://github.com/Ivancic91/CNICA/blob/main/src/cnica/optimizer.py#L461-L552"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id0" title="Link to this definition">#</a></dt>
+<dd><p>Total objective and its projection onto the tangent space of <span class="math notranslate nohighlight">\(SL(n)\)</span>.</p>
+<p>Computes:</p>
+<div class="math notranslate nohighlight">
+\[f(M) = f_{\text{main}}(M) + h_R(M) + h_L(M) + f_s(M)\]</div>
+<p>When <cite>compute_grad=True</cite>, the summed Euclidean gradient <span class="math notranslate nohighlight">\(\nabla f\)</span> is
+projected onto the tangent space by removing the component that would
+change <span class="math notranslate nohighlight">\(\det(M)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[Z = \nabla f - \frac{\operatorname{Tr}(M^{-1} \nabla f)}{n} \cdot M\]</div>
+<p>This is derived by solving <span class="math notranslate nohighlight">\(\operatorname{Tr}(M^{-1} Z) = 0\)</span> with the
+ansatz <span class="math notranslate nohighlight">\(Z = \nabla f - cM\)</span>, which gives
+<span class="math notranslate nohighlight">\(c = \operatorname{Tr}(M^{-1} \nabla f) / \operatorname{Tr}(I_n) =
+\operatorname{Tr}(M^{-1} \nabla f) / n\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>M</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Current <span class="math notranslate nohighlight">\((n, n)\)</span> transformation matrix.</p></li>
+<li><p><strong>inv_M</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Inverse of <span class="math notranslate nohighlight">\(M\)</span>, shape <span class="math notranslate nohighlight">\((n, n)\)</span>.</p></li>
+<li><p><strong>Sigmas</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Covariance matrices of the source signals and their derivatives,
+each of shape <span class="math notranslate nohighlight">\((n, n)\)</span>.</p></li>
+<li><p><strong>C</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – <span class="math notranslate nohighlight">\((n, n_C)\)</span> left constraint matrix (convex hull vertices).</p></li>
+<li><p><strong>S</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – <span class="math notranslate nohighlight">\((n, n_S)\)</span> right constraint matrix (convex hull vertices).</p></li>
+<li><p><strong>mu</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Current barrier strength.</p></li>
+<li><p><strong>S_sums</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Row sums of the source matrix, length <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
+<li><p><strong>S_gram</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Normalised Gram matrix <span class="math notranslate nohighlight">\(SS^T / N\)</span>, shape <span class="math notranslate nohighlight">\((n, n)\)</span>.</p></li>
+<li><p><strong>lam</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Sparsity regularization strength.</p></li>
+<li><p><strong>n_samples</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Number of columns in <span class="math notranslate nohighlight">\(S\)</span>.</p></li>
+<li><p><strong>sparsity_gate_threshold</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <em>default</em> <code class="docutils literal notranslate"><span class="pre">0.5</span></code>) – Passed through to <cite>sparse_norm</cite> as the sigmoid gate midpoint <span class="math notranslate nohighlight">\(\beta\)</span>.</p></li>
+<li><p><strong>compute_grad</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>, <em>default</em> <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a>) – Whether to compute the projected tangent gradient <span class="math notranslate nohighlight">\(Z\)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="cnica.FuncResult.html#cnica.FuncResult" title="cnica.optimizer.FuncResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">FuncResult</span></code></a> – Scalar objective <cite>f</cite> and projected tangent gradient <cite>grad</cite> <span class="math notranslate nohighlight">\(Z\)</span>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id1">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">optimize_step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">M</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inv_M</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Sigmas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_sums</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_gram</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lam</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sparsity_gate_threshold</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_lr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_line_search_iters</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cnica/optimizer.html#MIOptimizer.optimize_step"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference external" href="https://github.com/Ivancic91/CNICA/blob/main/src/cnica/optimizer.py#L554-L680"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id1" title="Link to this definition">#</a></dt>
+<dd><p>Single Riemannian descent step via two-phase backtracking line search.</p>
+<p><strong>Phase 1 — Linearized backtracking:</strong> Uses the first-order Taylor
+approximation of the matrix inverse to cheaply find a step size
+<span class="math notranslate nohighlight">\(\alpha\)</span> satisfying the Armijo sufficient decrease condition:</p>
+<div class="math notranslate nohighlight">
+\[(M - \alpha Z)^{-1} \approx M^{-1} + \alpha M^{-1} Z M^{-1}\]</div>
+<p><strong>Phase 2 — Manifold retraction:</strong> Confirms the step using the exact
+matrix exponential retraction, starting from the <span class="math notranslate nohighlight">\(\alpha\)</span> found in
+Phase 1 and continuing to backtrack if needed:</p>
+<div class="math notranslate nohighlight">
+\[M_{\text{new}} = M \exp(-\alpha \Omega), \quad
+M_{\text{new}}^{-1} = \exp(\alpha \Omega) M^{-1}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Omega = M^{-1} Z\)</span> is the descent direction in the Lie algebra.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>M</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Current <span class="math notranslate nohighlight">\((n, n)\)</span> transformation matrix.</p></li>
+<li><p><strong>inv_M</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Inverse of <span class="math notranslate nohighlight">\(M\)</span>, shape <span class="math notranslate nohighlight">\((n, n)\)</span>.</p></li>
+<li><p><strong>Sigmas</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Covariance matrices of the source signals and their derivatives,
+each of shape <span class="math notranslate nohighlight">\((n, n)\)</span>.</p></li>
+<li><p><strong>C</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – <span class="math notranslate nohighlight">\((n, n_C)\)</span> left constraint matrix (convex hull vertices).</p></li>
+<li><p><strong>S</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – <span class="math notranslate nohighlight">\((n, n_S)\)</span> right constraint matrix (convex hull vertices).</p></li>
+<li><p><strong>mu</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Current barrier strength.</p></li>
+<li><p><strong>S_sums</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Row sums of the source matrix, length <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
+<li><p><strong>S_gram</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Normalised Gram matrix <span class="math notranslate nohighlight">\(SS^T / N\)</span>, shape <span class="math notranslate nohighlight">\((n, n)\)</span>.</p></li>
+<li><p><strong>lam</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Sparsity regularization strength.</p></li>
+<li><p><strong>n_samples</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Number of columns in <span class="math notranslate nohighlight">\(S\)</span>.</p></li>
+<li><p><strong>sparsity_gate_threshold</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Sigmoid gate midpoint <span class="math notranslate nohighlight">\(\beta\)</span> passed through to <cite>sparse_norm</cite>.</p></li>
+<li><p><strong>initial_lr</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Starting step size <span class="math notranslate nohighlight">\(\alpha\)</span> for backtracking.</p></li>
+<li><p><strong>max_line_search_iters</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Maximum number of backtracking steps in each phase before
+declaring failure.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>success</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – True if a descent step satisfying the Armijo condition was found.</p></li>
+<li><p><strong>M_new</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Updated transformation matrix (unchanged if <cite>success=False</cite>).</p></li>
+<li><p><strong>inv_M_new</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Inverse of <cite>M_new</cite> (unchanged if <cite>success=False</cite>).</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id2">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">normalize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cnica/optimizer.html#MIOptimizer.normalize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference external" href="https://github.com/Ivancic91/CNICA/blob/main/src/cnica/optimizer.py#L682-L753"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id2" title="Link to this definition">#</a></dt>
+<dd><p>Rescales <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(S\)</span> so that their row variances are balanced
+across the left and right barrier terms, and both matrices have unit
+standard deviation.</p>
+<p>Computes two diagonal scaling matrices <span class="math notranslate nohighlight">\(\Lambda_C\)</span> and
+<span class="math notranslate nohighlight">\(\Lambda_S\)</span> such that:</p>
+<div class="math notranslate nohighlight">
+\[C_{\text{norm}} = \Lambda_C \cdot C, \quad
+S_{\text{norm}} = \Lambda_S \cdot S\]</div>
+<p>The scaling has two components applied sequentially:</p>
+<p>1. <strong>Barrier balancing:</strong> <span class="math notranslate nohighlight">\(\lambda_i = (\text{Var}(C_i) /
+\text{Var}(S_i))^{1/4}\)</span> distributes the variance ratio evenly
+between <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(S\)</span> in log-space, equalizing barrier
+gradient magnitudes.</p>
+<p>2. <strong>Std normalization:</strong> both matrices are divided by their global
+standard deviation so typical entry magnitudes are <span class="math notranslate nohighlight">\(O(1)\)</span>,
+making <cite>BARRIER_DELTA</cite> meaningful across datasets of different scales.</p>
+<p>The scaling matrices allow the transformation to be inverted exactly:</p>
+<div class="math notranslate nohighlight">
+\[C = \Lambda_C^{-1} C_{\text{norm}}, \quad
+S = \Lambda_S^{-1} S_{\text{norm}}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>C</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – <span class="math notranslate nohighlight">\((n, n_C)\)</span> left constraint matrix.</p></li>
+<li><p><strong>S</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – <span class="math notranslate nohighlight">\((n, n_S)\)</span> right constraint matrix.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>C_norm</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Normalized version of <span class="math notranslate nohighlight">\(C\)</span>, shape <span class="math notranslate nohighlight">\((n, n_C)\)</span>.</p></li>
+<li><p><strong>S_norm</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Normalized version of <span class="math notranslate nohighlight">\(S\)</span>, shape <span class="math notranslate nohighlight">\((n, n_S)\)</span>.</p></li>
+<li><p><strong>Lambda_C</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – <span class="math notranslate nohighlight">\((n, n)\)</span> diagonal scaling matrix for <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
+<li><p><strong>Lambda_S</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – <span class="math notranslate nohighlight">\((n, n)\)</span> diagonal scaling matrix for <span class="math notranslate nohighlight">\(S\)</span>.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id3">
+<span class="sig-name descname"><span class="pre">get_covariances</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">S</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cnica/optimizer.html#MIOptimizer.get_covariances"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference external" href="https://github.com/Ivancic91/CNICA/blob/main/src/cnica/optimizer.py#L755-L824"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id3" title="Link to this definition">#</a></dt>
+<dd><p>Covariance matrices of <span class="math notranslate nohighlight">\(S\)</span> and its filtered temporal derivatives.</p>
+<p>For each active flag in <cite>params</cite>, computes the <span class="math notranslate nohighlight">\((n, n)\)</span> covariance
+matrix of the corresponding derivative of <span class="math notranslate nohighlight">\(S\)</span>. All orders are
+computed on the band-limited signal via unsupervised Parks-McClellan FIR
+filters tuned by minimizing the MSRAC of the rejected band, ensuring
+consistent frequency content across all covariance matrices.</p>
+<p>If the signal is too short to apply filtering safely, all orders fall
+back to using the raw (unfiltered) signal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>S</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – <span class="math notranslate nohighlight">\((n, n_{\text{samples}})\)</span> source signal matrix, one row per
+channel.</p></li>
+<li><p><strong>params</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>) – Flags selecting which derivative orders to include:
+<code class="docutils literal notranslate"><span class="pre">(use_0th,</span> <span class="pre">use_1st,</span> <span class="pre">use_2nd)</span></code>. At least one must be True.
+Multiple True flags produce multiple covariance matrices, all
+included in the returned list.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a> – Covariance matrices of shape <span class="math notranslate nohighlight">\((n, n)\)</span>, one per active flag in
+<cite>params</cite>, in order of derivative order.</p>
+</dd>
+<dt class="field-odd">Warns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>UserWarning</strong> – If <span class="math notranslate nohighlight">\(n_{\text{samples}} &lt; 2m + \text{max_{\text{lag}}} + 1\)</span>, the signal
+is too short to filter safely. All derivative orders fall back to
+raw (unfiltered) covariances.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id4">
+<span class="sig-name descname"><span class="pre">prune</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cnica/optimizer.html#MIOptimizer.prune"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference external" href="https://github.com/Ivancic91/CNICA/blob/main/src/cnica/optimizer.py#L826-L875"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id4" title="Link to this definition">#</a></dt>
+<dd><p>Removes low-magnitude points clustered near the origin.</p>
+<p>Two thresholds are computed and the minimum is taken as the effective
+cutoff, protecting against outliers inflating the max-based threshold
+and against dense origin clusters inflating the percentile-based one:</p>
+<ul class="simple">
+<li><p>Percentile threshold: the <span class="math notranslate nohighlight">\(\gamma\)</span>-percentile of point magnitudes.</p></li>
+<li><p>Max threshold: <span class="math notranslate nohighlight">\(\gamma \times \max(\|x\|)\)</span>.</p></li>
+</ul>
+<p>Points with magnitude below the effective threshold are removed. If
+pruning would leave fewer than <span class="math notranslate nohighlight">\(d + 1\)</span> points (the minimum for a
+non-degenerate convex hull in <span class="math notranslate nohighlight">\(d\)</span> dimensions), the original data
+is returned unchanged.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – <span class="math notranslate nohighlight">\((d, N)\)</span> data matrix.</p></li>
+<li><p><strong>gamma</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <em>default</em> <code class="docutils literal notranslate"><span class="pre">0.01</span></code>) – Controls the pruning threshold as a fraction of the data’s
+magnitude range. Larger values prune more aggressively.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a> – Pruned data matrix of shape <span class="math notranslate nohighlight">\((d, N')\)</span> where <span class="math notranslate nohighlight">\(N' \leq N\)</span>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id5">
+<span class="sig-name descname"><span class="pre">extract_boundary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cnica/optimizer.html#MIOptimizer.extract_boundary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference external" href="https://github.com/Ivancic91/CNICA/blob/main/src/cnica/optimizer.py#L877-L945"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id5" title="Link to this definition">#</a></dt>
+<dd><p>Extracts the outer boundary points of the dataset.</p>
+<p>Uses one of two methods depending on dimensionality and dataset size:</p>
+<p><strong>Tier 1 — Exact Convex Hull</strong> (<span class="math notranslate nohighlight">\(d \leq\)</span> <cite>CONVEX_HULL_MAX_DIM</cite>,
+<span class="math notranslate nohighlight">\(N \leq\)</span> <cite>CONVEX_HULL_MAX_SAMPLES</cite>): computes the exact convex hull
+via QHull and returns its vertices. Falls back to Tier 2 if QHull fails
+(e.g. perfectly collinear data). These thresholds reflect empirically
+observed performance limits of the QHull algorithm.</p>
+<p><strong>Tier 2 — Support Function Approximation</strong> (high-dimensional or large
+<span class="math notranslate nohighlight">\(N\)</span>): evaluates the support function of the dataset along <span class="math notranslate nohighlight">\(2d\)</span>
+axis-aligned basis directions and
+<span class="math notranslate nohighlight">\(d \times \texttt{NUM_PROBES_PER_D}\)</span> random unit directions,
+returning the unique set of extreme points found.</p>
+<section id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Link to this heading">#</a></h2>
+<p>Sartipizadeh, H., &amp; Suryanarayanan, S. (2016).
+“Computing the Approximate Convex Hull in High Dimensions.”
+IEEE Access.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – <span class="math notranslate nohighlight">\((d, N)\)</span> data matrix of boundary candidates.</p>
+</dd>
+<dt class="field-even">returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a> – <span class="math notranslate nohighlight">\((d, N')\)</span> matrix of boundary points where <span class="math notranslate nohighlight">\(N' \leq N\)</span>.
+Returns <cite>data</cite> unchanged if <span class="math notranslate nohighlight">\(N &lt; 3\)</span>.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id6">
+<span class="sig-name descname"><span class="pre">fit_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cnica/optimizer.html#MIOptimizer.fit_transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference external" href="https://github.com/Ivancic91/CNICA/blob/main/src/cnica/optimizer.py#L947-L1118"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id6" title="Link to this definition">#</a></dt>
+<dd><p>Orchestrates the barrier method to find the optimal transformation
+<span class="math notranslate nohighlight">\(M\)</span>.</p>
+<p>Follows an interior point central path: starting from a large <span class="math notranslate nohighlight">\(\mu\)</span>,
+the inner loop minimizes <span class="math notranslate nohighlight">\(f(M)\)</span> for fixed <span class="math notranslate nohighlight">\(\mu\)</span>, then
+<span class="math notranslate nohighlight">\(\mu\)</span> is cooled by <cite>BARRIER_COOLING_RATE</cite> and the process repeats
+until the duality gap
+<span class="math notranslate nohighlight">\(n_{\text{constraints}} \cdot \mu\)</span> falls below <cite>tol</cite>.</p>
+<p><span class="math notranslate nohighlight">\(M\)</span> is optimized in <span class="math notranslate nohighlight">\(SL(n)\)</span> by projecting gradients onto the
+tangent space, keeping <span class="math notranslate nohighlight">\(\det(M)\)</span> stable throughout.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>C</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – <span class="math notranslate nohighlight">\((n, n_C)\)</span> left constraint matrix. All elements must be
+non-negative.</p></li>
+<li><p><strong>S</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – <span class="math notranslate nohighlight">\((n, n_S)\)</span> right constraint (source) matrix. All elements must
+be non-negative.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="cnica.MIOptimizerResult.html#cnica.MIOptimizerResult" title="cnica.MIOptimizerResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">MIOptimizerResult</span></code></a> – Contains the optimized matrix <code class="docutils literal notranslate"><span class="pre">x</span></code>, convergence info
+<code class="docutils literal notranslate"><span class="pre">success</span></code> and <code class="docutils literal notranslate"><span class="pre">message</span></code>, final objective <code class="docutils literal notranslate"><span class="pre">fun</span></code>, final
+gradient <code class="docutils literal notranslate"><span class="pre">jac</span></code>, iteration counts <code class="docutils literal notranslate"><span class="pre">nit</span></code> and <code class="docutils literal notranslate"><span class="pre">nit_outer</span></code>,
+and the transformed constraint matrices <code class="docutils literal notranslate"><span class="pre">inv_MT_C</span></code> and <code class="docutils literal notranslate"><span class="pre">MS</span></code>
+for verification.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="cnica.CNICA.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">cnica.CNICA</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="cnica.FuncResult.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">cnica.FuncResult</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cnica.MIOptimizer"><code class="docutils literal notranslate"><span class="pre">MIOptimizer</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cnica.MIOptimizer.fit_transform"><code class="docutils literal notranslate"><span class="pre">MIOptimizer.fit_transform()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cnica.MIOptimizer.optimize_step"><code class="docutils literal notranslate"><span class="pre">MIOptimizer.optimize_step()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cnica.MIOptimizer.f"><code class="docutils literal notranslate"><span class="pre">MIOptimizer.f()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cnica.MIOptimizer.normalize"><code class="docutils literal notranslate"><span class="pre">MIOptimizer.normalize()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cnica.MIOptimizer.get_covariances"><code class="docutils literal notranslate"><span class="pre">MIOptimizer.get_covariances()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cnica.MIOptimizer.prune"><code class="docutils literal notranslate"><span class="pre">MIOptimizer.prune()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cnica.MIOptimizer.extract_boundary"><code class="docutils literal notranslate"><span class="pre">MIOptimizer.extract_boundary()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cnica.MIOptimizer.main"><code class="docutils literal notranslate"><span class="pre">MIOptimizer.main()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cnica.MIOptimizer.right_barrier"><code class="docutils literal notranslate"><span class="pre">MIOptimizer.right_barrier()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cnica.MIOptimizer.left_barrier"><code class="docutils literal notranslate"><span class="pre">MIOptimizer.left_barrier()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cnica.MIOptimizer.sparse_norm"><code class="docutils literal notranslate"><span class="pre">MIOptimizer.sparse_norm()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id0"><code class="docutils literal notranslate"><span class="pre">MIOptimizer.f()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><code class="docutils literal notranslate"><span class="pre">MIOptimizer.optimize_step()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"><code class="docutils literal notranslate"><span class="pre">MIOptimizer.normalize()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"><code class="docutils literal notranslate"><span class="pre">MIOptimizer.get_covariances()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4"><code class="docutils literal notranslate"><span class="pre">MIOptimizer.prune()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5"><code class="docutils literal notranslate"><span class="pre">MIOptimizer.extract_boundary()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6"><code class="docutils literal notranslate"><span class="pre">MIOptimizer.fit_transform()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Robert J. S. Ivancic
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025, Robert J. S. Ivancic.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+  Last updated on 2026-04-13.
+  <br/>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

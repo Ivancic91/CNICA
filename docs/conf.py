@@ -27,7 +27,7 @@ from typing import Any
 
 sys.path.insert(0, str(Path("../src").resolve()))
 
-import CNICA
+import cnica
 
 # -- General configuration ---------------------------------------------
 
@@ -51,7 +51,7 @@ extensions = [
     # - easier external links
     # "sphinx.ext.extlinks",
     # - view source code on created page
-    # "sphinx.ext.viewcode",
+    "sphinx.ext.viewcode",
     # - view source code on github
     "sphinx.ext.linkcode",
     # - add copy button
@@ -67,10 +67,29 @@ extensions = [
 
 autosectionlabel_prefix_document = True
 nitpicky = True
-suppress_warnings = ["autosectionlabel.*"]
+suppress_warnings = [
+    "autosectionlabel.*",
+    "autodoc.duplicate_object",
+    "index"]
 nitpick_ignore = [
-    # ("py:class", "Command"),
+    ("py:class", "MetadataRequest"),
+    ("py:class", "estimator instance"),
+    ("py:obj", "cnica.MIOptimizer.f"),
+    ("py:obj", "cnica.MIOptimizer.optimize_step"),
+    ("py:obj", "cnica.MIOptimizer.normalize"),
+    ("py:obj", "cnica.MIOptimizer.get_covariances"),
+    ("py:obj", "cnica.MIOptimizer.prune"),
+    ("py:obj", "cnica.MIOptimizer.extract_boundary"),
+    ("py:obj", "cnica.MIOptimizer.fit_transform"),
 ]
+
+# Configure MathJax to recognize $...$ and $$...$$ delimiters
+mathjax3_config = {
+    "tex": {
+        "inlineMath": [["$", "$"], ["\\(", "\\)"]],
+        "displayMath": [["$$", "$$"], ["\\[", "\\]"]],
+    }
+}
 
 # -- myst stuff ---------------------------------------------------------
 myst_enable_extensions = [
@@ -122,7 +141,7 @@ nb_execution_mode = "cache"
 
 # set the kernel name
 nb_kernel_rgx_aliases = {
-    "CNICA.*": "python3",
+    "cnica.*": "python3",
     "conda.*": "python3",
 }
 
@@ -145,16 +164,18 @@ html_context = {
 
 # -- python3 ---------------------------------------------------------------
 autosummary_generate = True
+autosummary_generate_overwrite = False
 # autosummary_generate = False
 autodoc_member_order = "bysource"
 
 # autoclass_content = "both"  # include both class docstring and __init__
 autodoc_default_flags = [
-    # Make sure that any autodoc declarations show the right members
     "members",
-    "inherited-members",
-    "private-members",
+    #"inherited-members",
+    #"private-members",
     "show-inheritance",
+    "undoc-members",
+    "no-index",
 ]
 autodoc_typehints = "none"
 
@@ -207,6 +228,9 @@ napoleon_type_aliases = {
     "MaskedArray": "~numpy.ma.MaskedArray",
     "dtype": "~numpy.dtype",
     "ComplexWarning": "~numpy.ComplexWarning",
+    "np.ndarray": "~numpy.ndarray",
+    "ndarray": "~numpy.ndarray",
+    "List[np.ndarray]": "list",
     # objects without namespace: pandas
     "Index": "~pandas.Index",
     "MultiIndex": "~pandas.MultiIndex",
@@ -220,8 +244,10 @@ napoleon_type_aliases = {
     # objects with abbreviated namespace (from pandas)
     "pd.Index": "~pandas.Index",
     "pd.NaT": "~pandas.NaT",
+    # other
+    "Tuple[bool, bool, bool]": "tuple",
+    "FuncResult": "~cnica.optimizer.FuncResult",
 }
-
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
@@ -234,6 +260,7 @@ source_suffix = {
     ".rst": "restructuredtext",
     ".ipynb": "myst-nb",
     ".myst": "myst-nb",
+    ".md": "myst-nb",
 }
 
 # The master toctree document.
@@ -252,7 +279,7 @@ author = "Robert J. S. Ivancic"
 # The short X.Y version.
 def _get_version() -> str:
     if (version := os.environ.get("SETUPTOOLS_SCM_PRETEND_VERSION")) is None:
-        version = CNICA.__version__
+        version = cnica.__version__
     return version
 
 
@@ -421,15 +448,9 @@ texinfo_documents = [
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {
     "python": ("https://docs.python.org/3/", None),
-    # "pandas": ("https://pandas.pydata.org/pandas-docs/stable", None),
-    # "numpy": ("https://numpy.org/doc/stable", None),
-    # "scipy": ("https://docs.scipy.org/doc/scipy/", None),
-    # "numba": ("https://numba.readthedocs.io/en/stable/", None),
-    # "matplotlib": ("https://matplotlib.org/stable/", None),
-    # "dask": ("https://docs.dask.org/en/latest", None),
-    # "cftime": ("https://unidata.github.io/cftime", None),
-    # "sparse": ("https://sparse.pydata.org/en/latest/", None),
-    # "xarray": ("https://docs.xarray.dev/en/stable/", None),
+    "numpy": ("https://numpy.org/doc/stable", None),
+    "scipy": ("https://docs.scipy.org/doc/scipy/", None),
+    "sklearn": ("https://scikit-learn.org/stable", None),
 }
 
 linkcheck_ignore = ["https://doi.org/"]
@@ -475,10 +496,10 @@ def linkcode_resolve(domain: str, info: dict[str, Any]) -> str | None:
     linespec = f"#L{lineno}-L{lineno + len(source) - 1}" if lineno else ""
 
     # fmt: off
-    fn = os.path.relpath(fn, start=Path(CNICA.__file__).parent)
+    fn = os.path.relpath(fn, start=Path(cnica.__file__).parent)
     # fmt: on
 
-    return f"https://github.com/{github_username}/CNICA/blob/{html_context['github_version']}/src/CNICA/{fn}{linespec}"
+    return f"https://github.com/{github_username}/CNICA/blob/{html_context['github_version']}/src/cnica/{fn}{linespec}"
 
 
 # only set spelling stuff if installed:

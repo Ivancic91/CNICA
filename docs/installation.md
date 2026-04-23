@@ -11,7 +11,7 @@ pip install CNICA
 or
 
 ```bash
-conda install -c Ivancic91 CNICA
+uv pip install CNICA
 ```
 
 This is the preferred method to install, as it will always install the most
