@@ -37,48 +37,138 @@
 
 # `CNICA`
 
-A Python package to perform Coupled Non-negative Independent Component Analysis.
+Coupled Non-negative Independent Component Analysis for blind source separation
+of non-negative signals, with particular application to spectroscopic data.
 
 ## Overview
 
-This package was designed to solve the problem of D = C^T S, where D is a known
-positive matrix, and C and S are unknown positive matrices. This package is 
-specifically designed for the  
+CNICA decomposes an observed data matrix `D` of shape `(n_channels, n_samples)`
+into two non-negative factor matrices:
 
-## Features
+```math
+X \approx C^T S
 
-Some features...
+where `C` (shape: `n_components × n_channels`) is the mixing matrix (e.g.
+concentration profiles) and `S` (shape: `n_components × n_samples`) is the
+source matrix (e.g. pure component spectra).
 
-## Status
+The decomposition proceeds in two stages:
 
-This package is actively used by the author. Please feel free to create a pull
-request for wanted features and suggestions!
+1. **NMF initialization** — Non-negative Matrix Factorization provides an
+   initial estimate of `C` and `S`.
+2. **Riemannian mutual information minimization** — A linear transformation `M`
+   is found that minimizes statistical dependence between source components
+   while strictly enforcing non-negativity of `MS` and `M⁻ᵀC` via log-barrier
+   penalties on a Riemannian manifold. This recovers components that are
+   physically distinct rather than merely mathematically orthogonal, which is
+   the key advantage over standard NMF.
+
+CNICA is particularly well-suited to spectroscopic datasets where:
+
+- Components are non-negative by physical constraint (e.g. absorbance, emission
+  intensity).
+- Pure component signals are expected to be statistically independent.
+- Derivatives of the spectra or concentration profiles carry additional
+  discriminative information (e.g. sharp peaks vs. broad backgrounds).
+
+## Installation
+
+```bash
+pip install cnica
+```
+
+Requires Python 3.10+ and depends on `numpy`, `scipy`, and `scikit-learn`.
 
 ## Quick start
 
-Use one of the following
+```python
+import numpy as np
+from cnica import CNICA
+from cnica.models import NMFParams, MIOParams
 
-[comment]: <> ```bash
-[comment]: <> pip install CNICA
-[comment]: <> ```
+# Observed mixture matrix: 30 channels, 200 wavenumbers
+D = np.abs(np.random.randn(30, 200))
 
-[comment]: <> or
+model = CNICA(
+    n_components=3,
+    nmf_params=NMFParams(beta_loss='frobenius'),
+    mio_params=MIOParams(params=(True, True, False))
+)
 
-[comment]: <> ```bash
-[comment]: <> conda install -c Ivancic91 CNICA
-[comment]: <> ```
+S = model.fit_transform(D)  # Pure component spectra: (3, 200)
+C = model.C_                 # Concentration profiles: (3, 30)
+```
 
 ## Example usage
 
+A complete worked example using synthetic spectroscopic data with three known
+pure components (Gaussian peaks, cosine wave, linear background) is available
+in the [documentation][docs-link].
+
 ```python
-import CNICA
+import numpy as np
+from cnica import CNICA
+from cnica.models import NMFParams, MIOParams
+
+# Ground truth sources
+n_wave, n_channels, n_components = 1000, 100, 3
+x = np.linspace(0, 20, n_wave)
+
+s1 = np.exp(-(x-4)**2/0.5) + np.exp(-(x-10)**2/0.8) + np.exp(-(x-15)**2/0.4)
+s2 = np.cos(x) + 1.2
+s3 = 0.1 * x + 0.5
+S_true = np.vstack([s1, s2, s3])
+
+# Random non-negative mixing matrix and noisy observations
+np.random.seed(42)
+C_true = np.random.gamma(shape=2.0, scale=1.0, size=(n_channels, n_components))
+D_noisy = np.random.poisson(C_true @ S_true * 100) / 100
+
+# Fit CNICA
+model = CNICA(
+    n_components=n_components,
+    nmf_params=NMFParams(beta_loss='frobenius', max_iter=10000, tol=1e-9),
+    mio_params=MIOParams(params=(True, True, False), lam=10.0)
+)
+S_est = model.fit_transform(D_noisy)
+
+# Check convergence
+print(model.mio_result_.success)   # True if converged
+print(model.mio_result_.message)   # Convergence message
+
+# Apply to new data (estimate concentrations given known spectra)
+D_new = np.abs(np.random.randn(10, n_wave))
+C_new = model.transform(D_new)     # shape: (3, 10)
 ```
+
+## Features
+
+- **Similar to scikit-learn API** — implements `BaseEstimator` and
+  `TransformerMixin` for use in sklearn pipelines.
+- **Two-stage optimization** — NMF initialization followed by Riemannian
+  manifold optimization with log-barrier constraints.
+- **Unsupervised filter tuning** — Parks-McClellan FIR filters are tuned
+  automatically via Mean Squared Residual Autocorrelation (MSRAC) to compute
+  signal derivatives for the mutual information objective.
+- **Convex hull reduction** — barrier constraints are enforced only on convex
+  hull vertices of the constraint matrices, reducing cost from O(samples) to
+  O(vertices).
+- **Sparsity regularization** — optional Safe-Plateau sparsity norm rewards
+  peaky components (e.g. sharp Raman bands) while leaving dense components
+  (e.g. broad fluorescence) unaffected.
+
+## Status
+
+This package is actively developed and used by the author. Please feel free to
+open an issue or pull request for bug reports, feature requests, or suggestions.
 
 <!-- end-docs -->
 
 ## Documentation
 
-See the [documentation][docs-link] for further details.
+See the [documentation][docs-link] for the full API reference and worked
+examples.
+
 
 ## License
 
@@ -86,7 +176,7 @@ This is free software. See [LICENSE][license-link].
 
 ## Related work
 
-Any other stuff to mention....
+Publication eminent... 
 
 ## Contact
 
