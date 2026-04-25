@@ -47,6 +47,7 @@ into two non-negative factor matrices:
 
 ```math
 X \approx C^T S
+```
 
 where `C` (shape: `n_components × n_channels`) is the mixing matrix (e.g.
 concentration profiles) and `S` (shape: `n_components × n_samples`) is the
