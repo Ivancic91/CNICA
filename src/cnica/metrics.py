@@ -98,7 +98,7 @@ def evaluate_cnica(
 
     if n_components > 6:
         raise ValueError(
-            f"n_components={n_components} would require {np.math.factorial(n_components)} "
+            f"n_components={n_components} would require {np.math.factorial(n_components)} " # type: ignore
             f"permutations. Use a greedy matching approach for r > 6."
         )
 
@@ -110,7 +110,7 @@ def evaluate_cnica(
         r_S_mean = float(np.mean([
             pearsonr(S_true[i], S_est[perm[i]])[0]
             for i in range(n_components)
-        ]))
+        ])) # type: ignore
         if r_S_mean > best_r_S_mean:
             best_r_S_mean = r_S_mean
             best_perm = list(perm)
