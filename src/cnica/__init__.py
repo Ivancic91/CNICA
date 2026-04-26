@@ -9,6 +9,7 @@ from importlib.metadata import version as _version
 from cnica.core import CNICA
 from cnica.models import MIOptimizerResult, NMFParams, MIOParams
 from cnica.optimizer import MIOptimizer, FuncResult
+from cnica.metrics import evaluate_cnica, EvaluationResult
 
 
 try:
@@ -29,6 +30,8 @@ __all__ = [
     "MIOptimizerResult",
     "NMFParams",
     "MIOParams",
+    "evaluate_cnica",
+    "EvaluationResult",
     "__version__",
 ]
 

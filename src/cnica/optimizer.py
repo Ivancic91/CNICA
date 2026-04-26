@@ -474,7 +474,7 @@ class MIOptimizer:
         S_gram: NDArray[np.float64],
         lam: float,
         n_samples: int,
-        sparsity_gate_threshold: float = 0.5,
+        sparsity_gate_threshold: float = 0.8,
         compute_grad: bool = True
     ) -> FuncResult:
         r"""

@@ -121,5 +121,5 @@ class MIOParams:
     initial_lr: float = 0.1
     filter_half_order: int = 10
     filter_max_lag: int = 10
-    lam: float = 100.0
-    sparsity_gate_threshold: float = 0.7
+    lam: float = 20.0
+    sparsity_gate_threshold: float = 0.8
